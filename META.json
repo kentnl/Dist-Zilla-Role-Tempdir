@@ -1,0 +1,36 @@
+{
+   "resources" : {
+      "repository" : "http://github.com/kentfredric/Dist-Zilla-Role-Tempdir"
+   },
+   "generated_by" : "Dist::Zilla version 1.092930",
+   "meta-spec" : {
+      "version" : 1.4,
+      "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
+   },
+   "version" : "0.01000003",
+   "name" : "Dist-Zilla-Role-Tempdir",
+   "author" : [
+      "Kent Fredric <kentnl@cpan.org>"
+   ],
+   "license" : "perl",
+   "provides" : {
+      "Dist::Zilla::Role::Tempdir" : {
+         "version" : "0.01000003",
+         "file" : "lib/Dist/Zilla/Role/Tempdir.pm"
+      }
+   },
+   "requires" : {
+      "File::Find::Rule" : "0.30",
+      "namespace::autoclean" : "0.09",
+      "File::Tempdir" : "0.02",
+      "Digest::base" : "1.16",
+      "File::chdir" : "0.1002",
+      "Digest::SHA" : "5.47",
+      "Dist::Zilla" : "1.092930",
+      "Path::Class" : "0.17",
+      "File::Slurp" : "9999.13",
+      "Moose" : "0.92"
+   },
+   "abstract" : "Shell Out and collect the result in a DZ plug-in."
+}
+

@@ -1,0 +1,28 @@
+---
+abstract: 'Shell Out and collect the result in a DZ plug-in.'
+author:
+  - 'Kent Fredric <kentnl@cpan.org>'
+generated_by: 'Dist::Zilla version 1.092930'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Dist-Zilla-Role-Tempdir
+provides:
+  Dist::Zilla::Role::Tempdir:
+    file: lib/Dist/Zilla/Role/Tempdir.pm
+    version: 0.01000003
+requires:
+  Digest::SHA: 5.47
+  Digest::base: 1.16
+  Dist::Zilla: 1.092930
+  File::Find::Rule: 0.30
+  File::Slurp: 9999.13
+  File::Tempdir: 0.02
+  File::chdir: 0.1002
+  Moose: 0.92
+  Path::Class: 0.17
+  namespace::autoclean: 0.09
+resources:
+  repository: http://github.com/kentfredric/Dist-Zilla-Role-Tempdir
+version: 0.01000003
