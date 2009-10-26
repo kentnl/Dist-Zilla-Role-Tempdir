@@ -5,8 +5,6 @@ package Dist::Zilla::Role::Tempdir;
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
-# $Id:$
-
 use Moose::Role;
 use Digest::SHA;
 use File::Tempdir;
@@ -20,7 +18,8 @@ use namespace::autoclean;
 
 =head1 SYNOPSIS
 
-  package Dist::Zilla::Plugin::FooBar;
+  package #
+    Dist::Zilla::Plugin::FooBar;
 
   use Moose;
   with 'Dist::Zilla::Role::Tempdir';
@@ -59,7 +58,7 @@ Response is an array of hash-ref.
 
     { name => 'file/Name/Here' ,
       status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-      file   => Dist::Zilla::Role::File object ( missing if status => 'D'.
+      file   => Dist::Zilla::Role::File object ( missing if status => 'D'),
     }
 
 =cut
