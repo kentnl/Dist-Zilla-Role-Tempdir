@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
+0.01021401 2010-05-23 12:16:50 Pacific/Auckland
+          use @KENTNL
+          upgrade to Dist::Zilla 2
+
 0.01000003 2009-10-26 02:51:22 UTC
           First version.
 

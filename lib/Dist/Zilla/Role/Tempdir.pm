@@ -2,9 +2,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Tempdir;
-our $VERSION = '0.01000003';
-
-
+BEGIN {
+  $Dist::Zilla::Role::Tempdir::VERSION = '0.01021401';
+}
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
@@ -140,7 +140,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01000003
+version 0.01021401
 
 =head1 SYNOPSIS
 
@@ -166,10 +166,6 @@ version 0.01000003
     }
   }
 
-=cut
-
-=pod
-
 =head1 METHODS
 
 =head2 capture_tempdir
@@ -189,10 +185,6 @@ Response is an array of hash-ref.
       file   => Dist::Zilla::Role::File object ( missing if status => 'D'),
     }
 
-=cut
-
-=pod
-
 =head1 PRIVATE ATTRIBUTES
 
 =head2 _digester
@@ -203,19 +195,11 @@ Response is an array of hash-ref.
 
 Used for Digesting the contents of files.
 
-=cut
-
-=pod
-
 =head1 PRIVATE METHODS
 
 =head2 _build__digester
 
 returns an instance of Digest::SHA with 512bit hashes.
-
-=cut
-
-=pod
 
 =head2 _digest_for
 
@@ -225,11 +209,11 @@ Hashes content and returns the result in b64.
 
 =head1 AUTHOR
 
-Kent Fredric <kentnl@cpan.org>
+  Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Kent Fredric.
+This software is copyright (c) 2010 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

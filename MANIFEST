@@ -4,7 +4,6 @@ LICENSE
 MANIFEST
 META.json
 META.yml
-Makefile.PL
 README
 dist.ini
 lib/Dist/Zilla/Role/Tempdir.pm
@@ -14,6 +13,5 @@ t/01-poc.t
 t/author-critic.t
 t/author-kwalitee.t
 t/fake/dist.pm
-t/release-meta-yaml.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

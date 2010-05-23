@@ -5,7 +5,19 @@ use warnings;
 use Test::More tests => 5;    # last test to print
 
 use Dist::Zilla;
+use Dist::Zilla::Tester;
 use Dist::Zilla::Role::Tempdir;
+
+sub _build_config {
+  my $out = <<'EOF';
+  name = Test-DZRTd
+  copyright_holder = Kent Fredric
+  main_module = t/fake/dist.pm
+  abstract = A Fake Dist
+  license = Perl_5
+EOF
+  $out;
+}
 
 {
 
@@ -23,17 +35,10 @@ use Dist::Zilla::Role::Tempdir;
   __PACKAGE__->meta->make_immutable;
 }
 
-my $dz = Dist::Zilla->new(
-  root             => 't/fake/',
-  name             => 'Test-DZRTd',
-  copyright_holder => 'Kent Fredric',
-  main_module      => 't/fake/dist.pm',
-  abstract         => "A Fake Dist",
-  license          => "Perl_5",
-  plugins          => [],
-);
+my $dz =
+  Dist::Zilla::Tester->from_config( { dist_root => 't/fake/' }, { add_files => { 'source/dist.ini' => _build_config() } } );
 
-for (qw( AllFiles )) {
+for (qw( GatherDir )) {
   my $full = 'Dist::Zilla::Plugin::' . $_;
   eval "use $full; 1" or die("Cant load plugin >$full<");
   my $plug = $full->new( zilla => $dz, plugin_name => $_ );
