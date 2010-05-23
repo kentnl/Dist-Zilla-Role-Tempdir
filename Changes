@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01021401 2010-05-23 12:16:50 Pacific/Auckland
           use @KENTNL
           upgrade to Dist::Zilla 2
 
