@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          Tests added for OO mode.
           Replaced hash with a more pragmatic object. ( Backwards compatible ).
           Fix tests relying on unixisms on Win(64/32)
 
