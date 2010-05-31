@@ -35,8 +35,8 @@ use namespace::autoclean;
     });
 
     for ( @generated_files ) {
-      if( $_->{status} eq 'N' && $_->{name} =~ qr/someregex/ ){
-        $self->add_file( $_->{file});
+      if( $_->is_new && $_->name =~ qr/someregex/ ){
+        $self->add_file( $_->file );
       }
     }
   }

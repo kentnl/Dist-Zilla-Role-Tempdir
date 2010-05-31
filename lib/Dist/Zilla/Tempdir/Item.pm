@@ -31,7 +31,7 @@ has 'name' => (
   is       => 'rw',
 );
 
-sub mk_status {
+sub _mk_status {
   my $name = shift;
   my $value = shift;
 
@@ -62,12 +62,14 @@ sub mk_status {
   }
 }
 
-mk_status('modified', 'M');
-mk_status('original', 'O');
-mk_status('new',      'N' );
-mk_status('deleted',  'D' );
+_mk_status('modified', 'M');
+_mk_status('original', 'O');
+_mk_status('new',      'N' );
+_mk_status('deleted',  'D' );
 
 
 __PACKAGE__->meta->make_immutable;
 
 no Moose;
+
+1;
