@@ -11,8 +11,6 @@ use Scalar::Util qw( blessed );
 
 use namespace::autoclean;
 
-use Data::Dump qw( dump );
-
 has 'status' => ( 
   isa        => 'Str',
 #  required   => 1,
@@ -41,7 +39,6 @@ sub _mk_status {
       unless blessed($self);
     croak "too many arguments ( 0 expected ) to ->" . $name 
       if @_ ;
-  #  dump { "set_${name}($value)" => $self };
     $self->status($value);
   };
 
@@ -51,7 +48,6 @@ sub _mk_status {
       unless blessed($self);
     croak "too many arguments ( 0 expected ) to ->" . $name 
       if @_ ;
- #   dump { "is_${name}(${value})" => $self };
     $self->status() eq $value;
   };
 
