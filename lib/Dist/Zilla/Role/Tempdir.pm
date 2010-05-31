@@ -41,6 +41,16 @@ use namespace::autoclean;
     }
   }
 
+This role is a convenience role for factoring into other plugins to use the power of Unix
+in any plugin. 
+
+If for whatever reason you need to shell out and run your own app that is not Perl ( ie: Java )
+to go through the code and make modifications, produce documentation, etc, then this role is for you.
+
+Important to note however, this role B<ONLY> deals with getting DZils state written out to disk,
+executing your given arbitrary code, and then collecting the results. At no point does it attempt to reinject
+those changes back into L<Dist::Zilla>. That is left as an exercise to the plugin implementor.
+
 =cut
 
 =head1 METHODS
@@ -55,12 +65,15 @@ Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the ch
 
   });
 
-Response is an array of hash-ref.
+Response is an array of L<Dist::Zilla::Tempdir::Item>
 
-    { name => 'file/Name/Here' ,
+   [ bless( { name => 'file/Name/Here' ,
       status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-      file   => Dist::Zilla::Role::File object ( missing if status => 'D'),
-    }
+      file   => Dist::Zilla::Role::File object
+    }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
+
+Make sure to look at L<Dist::Zilla::Tempdir::Item> for usage.
+
 
 =cut
 
@@ -195,6 +208,11 @@ sub _digest_for {
   return $self->_digester->b64digest;
 }
 
+=head1 SEE ALSO 
+
+L<Dist::Zilla::Tempdir::Item>
+
+=cut
 no Moose::Role;
 1;
 
