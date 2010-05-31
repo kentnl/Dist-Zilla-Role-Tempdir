@@ -72,7 +72,10 @@ is( $epm->{status}, 'N', 'New file example.pm appeared' );
 
 @files = $plug->capture_tempdir(
   sub {
-    system($^X, '-e', 'unlink "dist.pm"');
+#    system("cmd");
+    system($^X, '-we', 'unlink q{dist.pm}') and die;
+#    print "done!\n";
+#    system("cmd");
   }
 );
 

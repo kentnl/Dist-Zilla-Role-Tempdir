@@ -13,6 +13,7 @@ use Path::Class qw( dir file );
 use File::chdir;
 use File::Find::Rule;
 use Dist::Zilla::File::InMemory;
+use Dist::Zilla::Tempdir::Item;
 
 use namespace::autoclean;
 
@@ -102,11 +103,11 @@ sub capture_tempdir {
   my %output_files;
 
   for ( keys %input_files ) {
-    $output_files{$_} = {
-      status => 'D',
+    $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
       name   => $_,
       file   => $input_files{$_}->{file},
-    };
+    );
+    $output_files{$_}->set_deleted;
   }
 
   for my $filename (@files) {
@@ -120,29 +121,29 @@ sub capture_tempdir {
       # FILE NOT MODIFIED, (O)riginal
 
       if ( $input_files{$shortname}->{hash} eq $hash ) {
-        $output_files{$shortname}->{status} = 'O';
-        $output_files{$shortname}->{file}   = $input_files{$shortname}->{file};
+        $output_files{$shortname}->set_original;
+        $output_files{$shortname}->file( $input_files{$shortname}->{file} );
         next;
       }
 
       # FILE (M)odified
-      $output_files{$shortname}->{status} = 'M';
-      $output_files{$shortname}->{file}   = Dist::Zilla::File::InMemory->new(
+      $output_files{$shortname}->set_modified;
+      $output_files{$shortname}->file( Dist::Zilla::File::InMemory->new(
         name    => $shortname,
         content => $content,
-      );
+      ));
       next;
     }
 
     # FILE (N)ew
-    $output_files{$shortname} = {
-      status => 'N',
+    $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
       name   => $shortname,
       file   => Dist::Zilla::File::InMemory->new(
         name    => $shortname,
         content => $content,
       ),
-    };
+    );
+    $output_files{$shortname}->set_new;
   }
 
   return values %output_files;
