@@ -42,7 +42,7 @@ use namespace::autoclean;
   }
 
 This role is a convenience role for factoring into other plugins to use the power of Unix
-in any plugin. 
+in any plugin.
 
 If for whatever reason you need to shell out and run your own app that is not Perl ( ie: Java )
 to go through the code and make modifications, produce documentation, etc, then this role is for you.
@@ -117,8 +117,8 @@ sub capture_tempdir {
 
   for ( keys %input_files ) {
     $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
-      name   => $_,
-      file   => $input_files{$_}->{file},
+      name => $_,
+      file => $input_files{$_}->{file},
     );
     $output_files{$_}->set_deleted;
   }
@@ -141,17 +141,19 @@ sub capture_tempdir {
 
       # FILE (M)odified
       $output_files{$shortname}->set_modified;
-      $output_files{$shortname}->file( Dist::Zilla::File::InMemory->new(
-        name    => $shortname,
-        content => $content,
-      ));
+      $output_files{$shortname}->file(
+        Dist::Zilla::File::InMemory->new(
+          name    => $shortname,
+          content => $content,
+        )
+      );
       next;
     }
 
     # FILE (N)ew
     $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
-      name   => $shortname,
-      file   => Dist::Zilla::File::InMemory->new(
+      name => $shortname,
+      file => Dist::Zilla::File::InMemory->new(
         name    => $shortname,
         content => $content,
       ),
@@ -208,11 +210,12 @@ sub _digest_for {
   return $self->_digester->b64digest;
 }
 
-=head1 SEE ALSO 
+=head1 SEE ALSO
 
 L<Dist::Zilla::Tempdir::Item>
 
 =cut
+
 no Moose::Role;
 1;
 

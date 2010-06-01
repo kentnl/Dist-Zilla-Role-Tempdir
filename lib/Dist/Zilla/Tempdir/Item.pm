@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item;
 
-# ABSTRACT: A result object for things that DO() DZ::R::Tempdir; 
+# ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
 use Moose;
 use Carp qw( croak );
@@ -13,7 +13,7 @@ use namespace::autoclean;
 
 =head1 SYNOPSIS
 
-  my $foo = Dist::Zilla::Tempdir::Item->new( 
+  my $foo = Dist::Zilla::Tempdir::Item->new(
     name => 'Path/To/File.txt',
     file => $dzilfile,
   );
@@ -25,7 +25,7 @@ use namespace::autoclean;
   $foo->is_deleted; # true.
 
 Ultimately, I figured using a Character with "eq" every where in userland
-was a way to extra bugs that were hard to detect. Going via all the OO niceness 
+was a way to extra bugs that were hard to detect. Going via all the OO niceness
 you'll probably incur* a small performance penalty,  but things going B<Bang> when you
 make a typo or add invisible whitespace is a GoodThing.
 
@@ -37,7 +37,7 @@ make a typo or add invisible whitespace is a GoodThing.
 
 =head2 status
 
-  isa => Str, 
+  isa => Str,
   is  => rw,
 
 The internal status character. You can mangle this yourself if you want, and for compatibility with older versions
@@ -45,22 +45,23 @@ of this dist, you may even have to, but try not to, if it breaks, something some
 
 Using the is_* and set_* accessors is a I<much> smarter idea.
 
-At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforseeable expanding it to 
+At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforseeable expanding it to
 be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;] )
 
 =cut
 
-has 'status' => ( 
-  isa        => 'Str',
-#  required   => 1,
-# TODO: use MooseX::LazyRequire -- kentnl 2010-05-31
-  is         => 'rw',
+has 'status' => (
+  isa => 'Str',
+
+  #  required   => 1,
+  # TODO: use MooseX::LazyRequire -- kentnl 2010-05-31
+  is => 'rw',
 );
 
 =head2 file
 
   isa      => Dist::Zilla::Role::File,
-  required => 1, 
+  required => 1,
   is       => rw
 
 This is the Dist::Zilla::File::* item which we refer to. For items that C<is_deleted>, C<file> is likely to be the file before it got deleted.
@@ -77,11 +78,11 @@ has 'file' => (
 
 =head2 name
 
-  isa      => Str, 
+  isa      => Str,
   required => 1,
   is       => rw,
 
-This is the path to the file relative to the dist root. 
+This is the path to the file relative to the dist root.
 
 =cut
 
@@ -92,31 +93,31 @@ has 'name' => (
 );
 
 sub _mk_status {
-  my $name = shift;
+  my $name  = shift;
   my $value = shift;
 
-  my $setter = sub { 
+  my $setter = sub {
     my $self = shift;
-    croak $name . "is an instance method, not a class method" 
+    croak $name . "is an instance method, not a class method"
       unless blessed($self);
-    croak "too many arguments ( 0 expected ) to ->" . $name 
-      if @_ ;
+    croak "too many arguments ( 0 expected ) to ->" . $name
+      if @_;
     $self->status($value);
   };
 
   my $getter = sub {
     my $self = shift;
-    croak $name . "is an instance method, not a class method" 
+    croak $name . "is an instance method, not a class method"
       unless blessed($self);
-    croak "too many arguments ( 0 expected ) to ->" . $name 
-      if @_ ;
+    croak "too many arguments ( 0 expected ) to ->" . $name
+      if @_;
     $self->status() eq $value;
   };
 
-  { 
+  {
     no strict 'refs';
-    *{__PACKAGE__ . "::set_" . $name } = $setter;
-    *{__PACKAGE__ . "::is_" . $name } = $getter;
+    *{ __PACKAGE__ . "::set_" . $name } = $setter;
+    *{ __PACKAGE__ . "::is_" . $name }  = $getter;
   }
 }
 
@@ -132,7 +133,7 @@ sets the state to 'modified'
 
 =cut
 
-_mk_status('modified', 'M');
+_mk_status( 'modified', 'M' );
 
 =head2 is_original
 
@@ -144,11 +145,11 @@ sets the state to 'original'
 
 =cut
 
-_mk_status('original', 'O');
+_mk_status( 'original', 'O' );
 
 =head2 is_new
 
-returns if the file is new or not ( that is, if it wasn't in the dist prior to executing 
+returns if the file is new or not ( that is, if it wasn't in the dist prior to executing
 the given code ).
 
 =head2 set_new
@@ -157,7 +158,7 @@ sets the state to 'new'
 
 =cut
 
-_mk_status('new',      'N' );
+_mk_status( 'new', 'N' );
 
 =head2 is_deleted
 
@@ -169,7 +170,7 @@ sets the state to 'deleted'
 
 =cut
 
-_mk_status('deleted',  'D' );
+_mk_status( 'deleted', 'D' );
 
 __PACKAGE__->meta->make_immutable;
 
