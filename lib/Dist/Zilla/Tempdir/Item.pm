@@ -24,12 +24,15 @@ use namespace::autoclean;
   $foo->is_new; # false
   $foo->is_deleted; # true.
 
-Ultimately, I figured using a Character with "eq" every where in userland
-was a way to extra bugs that were hard to detect. Going via all the OO niceness
+Ultimately, I figured using a character with "C<eq>" every where in extending code
+was a way to extra bugs that were hard to detect. Going via all the Object-Oriented niceness
 you'll probably incur* a small performance penalty,  but things going B<Bang> when you
-make a typo or add invisible whitespace is a GoodThing.
+make a typo or add invisible white-space is a Good Thing.
 
-* albeit infintesimally insignificant in size, especially for something that will only take 15 seconds of run-time every once in a while, not to mention the overhead is drowned by the fact we're doing filesystem IO and running many of the files through a complete hashing algorithm to test for modification.
+* albeit immeasurably insignificant in size, especially for something that will only take
+15 seconds of run-time every once in a while, not to mention the overhead is drowned by the
+fact we're doing file-system IO and running many of the files through a complete hashing
+algorithm to test for modification.
 
 =cut
 
@@ -45,7 +48,7 @@ of this dist, you may even have to, but try not to, if it breaks, something some
 
 Using the is_* and set_* accessors is a I<much> smarter idea.
 
-At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforseeable expanding it to
+At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforeseeable expanding it to
 be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;] )
 
 =cut
@@ -98,27 +101,29 @@ sub _mk_status {
 
   my $setter = sub {
     my $self = shift;
-    croak $name . "is an instance method, not a class method"
+    croak $name . 'is an instance method, not a class method'
       unless blessed($self);
-    croak "too many arguments ( 0 expected ) to ->" . $name
+    croak 'too many arguments ( 0 expected ) to ->' . $name
       if @_;
     $self->status($value);
   };
 
   my $getter = sub {
     my $self = shift;
-    croak $name . "is an instance method, not a class method"
+    croak $name . 'is an instance method, not a class method'
       unless blessed($self);
-    croak "too many arguments ( 0 expected ) to ->" . $name
+    croak 'too many arguments ( 0 expected ) to ->' . $name
       if @_;
     $self->status() eq $value;
   };
 
   {
+    ## no critic ( ProhibitNoStrict )
     no strict 'refs';
-    *{ __PACKAGE__ . "::set_" . $name } = $setter;
-    *{ __PACKAGE__ . "::is_" . $name }  = $getter;
+    *{ __PACKAGE__ . q[::set_] . $name } = $setter;
+    *{ __PACKAGE__ . q[::is_] . $name }  = $getter;
   }
+  return 1;
 }
 
 =head1 METHODS

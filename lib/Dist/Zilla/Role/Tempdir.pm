@@ -41,15 +41,15 @@ use namespace::autoclean;
     }
   }
 
-This role is a convenience role for factoring into other plugins to use the power of Unix
-in any plugin.
+This role is a convenience role for factoring into other plug-ins to use the power of Unix
+in any plug-in.
 
-If for whatever reason you need to shell out and run your own app that is not Perl ( ie: Java )
+If for whatever reason you need to shell out and run your own app that is not Perl ( i.e.: Java )
 to go through the code and make modifications, produce documentation, etc, then this role is for you.
 
-Important to note however, this role B<ONLY> deals with getting DZils state written out to disk,
-executing your given arbitrary code, and then collecting the results. At no point does it attempt to reinject
-those changes back into L<Dist::Zilla>. That is left as an exercise to the plugin implementor.
+Important to note however, this role B<ONLY> deals with getting Dist::Zilla's state written out to disk,
+executing your given arbitrary code, and then collecting the results. At no point does it attempt to re-inject
+those changes back into L<Dist::Zilla>. That is left as an exercise to the plug-in developer.
 
 =cut
 
