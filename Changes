@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01022319 2010-06-02 06:03:23 Pacific/Auckland
           Updated synopsis to recommend OO way.
           Tests added for OO mode.
           Replaced hash with a more pragmatic object. ( Backwards compatible ).
