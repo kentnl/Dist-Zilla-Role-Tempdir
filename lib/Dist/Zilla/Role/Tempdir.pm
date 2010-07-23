@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 BEGIN {
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01021401';
+  $Dist::Zilla::Role::Tempdir::VERSION = '0.01027622';
 }
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
@@ -16,6 +16,7 @@ use Path::Class qw( dir file );
 use File::chdir;
 use File::Find::Rule;
 use Dist::Zilla::File::InMemory;
+use Dist::Zilla::Tempdir::Item;
 
 use namespace::autoclean;
 
@@ -42,7 +43,7 @@ sub capture_tempdir {
     my ( $name, $content, ) = ( $file->name, $file->content, );
 
     $input_files{ $file->name } = {
-      hash => $self->_digest_for( \$content ),
+      hash => $self->digest_for( \$content ),
       file => $file,
     };
 
@@ -60,50 +61,60 @@ sub capture_tempdir {
   my %output_files;
 
   for ( keys %input_files ) {
-    $output_files{$_} = {
-      status => 'D',
-      name   => $_,
-      file   => $input_files{$_}->{file},
-    };
+    $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
+      name => $_,
+      file => $input_files{$_}->{file},
+    );
+    $output_files{$_}->set_deleted;
   }
 
   for my $filename (@files) {
 
     my $shortname = file($filename)->relative($dir)->stringify;
     my $content   = file($filename)->slurp;
-    my $hash      = $self->_digest_for( \$content );
+    my $hash      = $self->digest_for( \$content );
 
     if ( exists $input_files{$shortname} ) {
 
       # FILE NOT MODIFIED, (O)riginal
 
       if ( $input_files{$shortname}->{hash} eq $hash ) {
-        $output_files{$shortname}->{status} = 'O';
-        $output_files{$shortname}->{file}   = $input_files{$shortname}->{file};
+        $output_files{$shortname}->set_original;
+        $output_files{$shortname}->file( $input_files{$shortname}->{file} );
         next;
       }
 
       # FILE (M)odified
-      $output_files{$shortname}->{status} = 'M';
-      $output_files{$shortname}->{file}   = Dist::Zilla::File::InMemory->new(
-        name    => $shortname,
-        content => $content,
+      $output_files{$shortname}->set_modified;
+      $output_files{$shortname}->file(
+        Dist::Zilla::File::InMemory->new(
+          name    => $shortname,
+          content => $content,
+        )
       );
       next;
     }
 
     # FILE (N)ew
-    $output_files{$shortname} = {
-      status => 'N',
-      name   => $shortname,
-      file   => Dist::Zilla::File::InMemory->new(
+    $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
+      name => $shortname,
+      file => Dist::Zilla::File::InMemory->new(
         name    => $shortname,
         content => $content,
       ),
-    };
+    );
+    $output_files{$shortname}->set_new;
   }
 
   return values %output_files;
+}
+
+
+sub digest_for {
+  my ( $self, $data ) = @_;
+  $self->_digester->reset;
+  $self->_digester->add( ${$data} );
+  return $self->_digester->b64digest;
 }
 
 
@@ -114,18 +125,12 @@ has _digester => (
 );
 
 
+## no critic ( ProhibitUnusedPrivateSubroutines )
 sub _build__digester {
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
 }
 
-
-sub _digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
-}
 
 no Moose::Role;
 1;
@@ -140,7 +145,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01021401
+version 0.01027622
 
 =head1 SYNOPSIS
 
@@ -160,11 +165,21 @@ version 0.01021401
     });
 
     for ( @generated_files ) {
-      if( $_->{status} eq 'N' && $_->{name} =~ qr/someregex/ ){
-        $self->add_file( $_->{file});
+      if( $_->is_new && $_->name =~ qr/someregex/ ){
+        $self->add_file( $_->file );
       }
     }
   }
+
+This role is a convenience role for factoring into other plug-ins to use the power of Unix
+in any plug-in.
+
+If for whatever reason you need to shell out and run your own app that is not Perl ( i.e.: Java )
+to go through the code and make modifications, produce documentation, etc, then this role is for you.
+
+Important to note however, this role B<ONLY> deals with getting C<Dist::Zilla>'s state written out to disk,
+executing your given arbitrary code, and then collecting the results. At no point does it attempt to re-inject
+those changes back into L<< C<Dist::Zilla>|Dist::Zilla >>. That is left as an exercise to the plug-in developer.
 
 =head1 METHODS
 
@@ -178,12 +193,20 @@ Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the ch
 
   });
 
-Response is an array of hash-ref.
+Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
 
-    { name => 'file/Name/Here' ,
+   [ bless( { name => 'file/Name/Here' ,
       status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-      file   => Dist::Zilla::Role::File object ( missing if status => 'D'),
-    }
+      file   => Dist::Zilla::Role::File object
+    }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
+
+Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
+
+=head2 digest_for
+
+  my $hash = $self->digest_for( \$content );
+
+Hashes content and returns the result in b64.
 
 =head1 PRIVATE ATTRIBUTES
 
@@ -201,15 +224,17 @@ Used for Digesting the contents of files.
 
 returns an instance of Digest::SHA with 512bit hashes.
 
-=head2 _digest_for
+=head1 SEE ALSO
 
-  my $hash = $self->_digest_for( \$content );
+=over 4
 
-Hashes content and returns the result in b64.
+=item * L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
+
+=back
 
 =head1 AUTHOR
 
-  Kent Fredric <kentnl@cpan.org>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

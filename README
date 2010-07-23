@@ -3,7 +3,7 @@ NAME
     plug-in.
 
 VERSION
-    version 0.01021401
+    version 0.01027622
 
 SYNOPSIS
       package #
@@ -22,11 +22,24 @@ SYNOPSIS
         });
 
         for ( @generated_files ) {
-          if( $_->{status} eq 'N' && $_->{name} =~ qr/someregex/ ){
-            $self->add_file( $_->{file});
+          if( $_->is_new && $_->name =~ qr/someregex/ ){
+            $self->add_file( $_->file );
           }
         }
       }
+
+    This role is a convenience role for factoring into other plug-ins to use
+    the power of Unix in any plug-in.
+
+    If for whatever reason you need to shell out and run your own app that
+    is not Perl ( i.e.: Java ) to go through the code and make
+    modifications, produce documentation, etc, then this role is for you.
+
+    Important to note however, this role ONLY deals with getting
+    "Dist::Zilla"'s state written out to disk, executing your given
+    arbitrary code, and then collecting the results. At no point does it
+    attempt to re-inject those changes back into "Dist::Zilla". That is left
+    as an exercise to the plug-in developer.
 
 METHODS
   capture_tempdir
@@ -40,12 +53,19 @@ METHODS
 
       });
 
-    Response is an array of hash-ref.
+    Response is an array of "::Tempdir::Item"
 
-        { name => 'file/Name/Here' ,
+       [ bless( { name => 'file/Name/Here' ,
           status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-          file   => Dist::Zilla::Role::File object ( missing if status => 'D'),
-        }
+          file   => Dist::Zilla::Role::File object
+        }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
+
+    Make sure to look at "Dist::Zilla::Tempdir::Item" for usage.
+
+  digest_for
+      my $hash = $self->digest_for( \$content );
+
+    Hashes content and returns the result in b64.
 
 PRIVATE ATTRIBUTES
   _digester
@@ -59,13 +79,11 @@ PRIVATE METHODS
   _build__digester
     returns an instance of Digest::SHA with 512bit hashes.
 
-  _digest_for
-      my $hash = $self->_digest_for( \$content );
-
-    Hashes content and returns the result in b64.
+SEE ALSO
+    *   "Dist::Zilla::Tempdir::Item"
 
 AUTHOR
-      Kent Fredric <kentnl@cpan.org>
+    Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2010 by Kent Fredric.

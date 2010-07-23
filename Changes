@@ -1,5 +1,17 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
+0.01027622 2010-07-24 09:29:14 Pacific/Auckland
+          Dropped the hardcoded Test::Kwalitee xt-test in favour of the TestKwalitee plugin.
+            ( This will hopefully get this module and all dependents out of the heavy 100 )
+          Documentation updated a bit.
+          digest_for is now a public method.
+
+0.01022319 2010-06-02 06:03:23 Pacific/Auckland
+          Updated synopsis to recommend OO way.
+          Tests added for OO mode.
+          Replaced hash with a more pragmatic object. ( Backwards compatible ).
+          Fix tests relying on unixisms on Win(64/32)
+
 0.01021401 2010-05-23 12:16:50 Pacific/Auckland
           use @KENTNL
           upgrade to Dist::Zilla 2

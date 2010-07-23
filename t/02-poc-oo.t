@@ -62,13 +62,13 @@ my (@files) = $plug->capture_tempdir(
 );
 
 my ( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
-is( $distpm->{status}, 'O', 'Dist.pm reports unmodified' );
+ok( $distpm->is_original, 'Dist.pm reports unmodified' );
 
 my ( $e2pm, ) = grep { $_->{name} eq 'example2.pm' } @files;
-is( $e2pm->{status}, 'N', 'New file example2.pm appeared' );
+ok( $e2pm->is_new, 'New file example2.pm appeared' );
 
 my ( $epm, ) = grep { $_->{name} eq 'example.pm' } @files;
-is( $epm->{status}, 'N', 'New file example.pm appeared' );
+ok( $epm->is_new, 'New file example.pm appeared' );
 
 @files = $plug->capture_tempdir(
   sub {
@@ -81,7 +81,7 @@ is( $epm->{status}, 'N', 'New file example.pm appeared' );
 
 ( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
 
-is( $distpm->{status}, 'D', 'dist.pm reports deleted' );
+ok( $distpm->is_deleted, 'dist.pm reports deleted' );
 
 @files = $plug->capture_tempdir(
   sub {
@@ -93,5 +93,5 @@ is( $distpm->{status}, 'D', 'dist.pm reports deleted' );
 #dump \@files;
 ( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
 
-is( $distpm->{status}, 'M', 'dist.pm reports modified' );
+ok( $distpm->is_modified, 'dist.pm reports modified' );
 
