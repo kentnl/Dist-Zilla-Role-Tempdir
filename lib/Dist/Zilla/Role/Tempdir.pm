@@ -164,6 +164,21 @@ sub capture_tempdir {
   return values %output_files;
 }
 
+=head2 digest_for
+
+  my $hash = $self->digest_for( \$content );
+
+Hashes content and returns the result in b64.
+
+=cut
+
+sub digest_for {
+  my ( $self, $data ) = @_;
+  $self->_digester->reset;
+  $self->_digester->add( ${$data} );
+  return $self->_digester->b64digest;
+}
+
 =head1 PRIVATE ATTRIBUTES
 
 =head2 _digester
@@ -194,21 +209,6 @@ returns an instance of Digest::SHA with 512bit hashes.
 sub _build__digester {
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
-}
-
-=head2 digest_for
-
-  my $hash = $self->digest_for( \$content );
-
-Hashes content and returns the result in b64.
-
-=cut
-
-sub digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
 }
 
 =head1 SEE ALSO
