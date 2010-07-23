@@ -110,6 +110,14 @@ sub capture_tempdir {
 }
 
 
+sub digest_for {
+  my ( $self, $data ) = @_;
+  $self->_digester->reset;
+  $self->_digester->add( ${$data} );
+  return $self->_digester->b64digest;
+}
+
+
 has _digester => (
   isa        => 'Digest::base',
   is         => 'rw',
@@ -117,17 +125,10 @@ has _digester => (
 );
 
 
+## no critic ( ProhibitUnusedPrivateSubroutines )
 sub _build__digester {
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
-}
-
-
-sub _digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
 }
 
 
@@ -176,9 +177,9 @@ in any plug-in.
 If for whatever reason you need to shell out and run your own app that is not Perl ( i.e.: Java )
 to go through the code and make modifications, produce documentation, etc, then this role is for you.
 
-Important to note however, this role B<ONLY> deals with getting Dist::Zilla's state written out to disk,
+Important to note however, this role B<ONLY> deals with getting C<Dist::Zilla>'s state written out to disk,
 executing your given arbitrary code, and then collecting the results. At no point does it attempt to re-inject
-those changes back into L<Dist::Zilla>. That is left as an exercise to the plug-in developer.
+those changes back into L<< C<Dist::Zilla>|Dist::Zilla >>. That is left as an exercise to the plug-in developer.
 
 =head1 METHODS
 
@@ -199,7 +200,13 @@ Response is an array of L<Dist::Zilla::Tempdir::Item>
       file   => Dist::Zilla::Role::File object
     }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
 
-Make sure to look at L<Dist::Zilla::Tempdir::Item> for usage.
+Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
+
+=head2 digest_for
+
+  my $hash = $self->digest_for( \$content );
+
+Hashes content and returns the result in b64.
 
 =head1 PRIVATE ATTRIBUTES
 
@@ -217,15 +224,13 @@ Used for Digesting the contents of files.
 
 returns an instance of Digest::SHA with 512bit hashes.
 
-=head2 _digest_for
-
-  my $hash = $self->_digest_for( \$content );
-
-Hashes content and returns the result in b64.
-
 =head1 SEE ALSO
 
-L<Dist::Zilla::Tempdir::Item>
+=over 4
+
+=item * L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
+
+=back
 
 =head1 AUTHOR
 

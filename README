@@ -36,10 +36,10 @@ SYNOPSIS
     modifications, produce documentation, etc, then this role is for you.
 
     Important to note however, this role ONLY deals with getting
-    Dist::Zilla's state written out to disk, executing your given arbitrary
-    code, and then collecting the results. At no point does it attempt to
-    re-inject those changes back into Dist::Zilla. That is left as an
-    exercise to the plug-in developer.
+    "Dist::Zilla"'s state written out to disk, executing your given
+    arbitrary code, and then collecting the results. At no point does it
+    attempt to re-inject those changes back into "Dist::Zilla". That is left
+    as an exercise to the plug-in developer.
 
 METHODS
   capture_tempdir
@@ -60,7 +60,12 @@ METHODS
           file   => Dist::Zilla::Role::File object
         }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
 
-    Make sure to look at Dist::Zilla::Tempdir::Item for usage.
+    Make sure to look at "Dist::Zilla::Tempdir::Item" for usage.
+
+  digest_for
+      my $hash = $self->digest_for( \$content );
+
+    Hashes content and returns the result in b64.
 
 PRIVATE ATTRIBUTES
   _digester
@@ -74,13 +79,8 @@ PRIVATE METHODS
   _build__digester
     returns an instance of Digest::SHA with 512bit hashes.
 
-  _digest_for
-      my $hash = $self->_digest_for( \$content );
-
-    Hashes content and returns the result in b64.
-
 SEE ALSO
-    Dist::Zilla::Tempdir::Item
+    *   "Dist::Zilla::Tempdir::Item"
 
 AUTHOR
     Kent Fredric <kentnl@cpan.org>
