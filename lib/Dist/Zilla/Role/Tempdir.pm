@@ -43,7 +43,7 @@ sub capture_tempdir {
     my ( $name, $content, ) = ( $file->name, $file->content, );
 
     $input_files{ $file->name } = {
-      hash => $self->_digest_for( \$content ),
+      hash => $self->digest_for( \$content ),
       file => $file,
     };
 
@@ -72,7 +72,7 @@ sub capture_tempdir {
 
     my $shortname = file($filename)->relative($dir)->stringify;
     my $content   = file($filename)->slurp;
-    my $hash      = $self->_digest_for( \$content );
+    my $hash      = $self->digest_for( \$content );
 
     if ( exists $input_files{$shortname} ) {
 
