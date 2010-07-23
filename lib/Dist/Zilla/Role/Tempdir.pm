@@ -65,7 +65,7 @@ Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the ch
 
   });
 
-Response is an array of L<Dist::Zilla::Tempdir::Item>
+Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
 
    [ bless( { name => 'file/Name/Here' ,
       status => 'O' # O = Original, N = New, M = Modified, D = Deleted
