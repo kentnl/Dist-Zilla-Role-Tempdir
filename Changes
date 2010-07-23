@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
-0.01027622 2010-07-24 09:27:06 Pacific/Auckland
+0.01027622 2010-07-24 09:27:24 Pacific/Auckland
           Dropped the hardcoded Test::Kwalitee xt-test in favour of the TestKwalitee plugin.
             ( This will hopefully get this module and all dependents out of the heavy 100 )
 
