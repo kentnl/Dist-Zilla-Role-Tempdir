@@ -53,7 +53,7 @@ METHODS
 
       });
 
-    Response is an array of Dist::Zilla::Tempdir::Item
+    Response is an array of "::Tempdir::Item"
 
        [ bless( { name => 'file/Name/Here' ,
           status => 'O' # O = Original, N = New, M = Modified, D = Deleted
