@@ -3,21 +3,22 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
 
 0.01027622 2010-07-23T21:29:14Z
-          Dropped the hardcoded Test::Kwalitee xt-test in favour of the TestKwalitee plugin.
-            ( This will hopefully get this module and all dependents out of the heavy 100 )
-          Documentation updated a bit.
-          digest_for is now a public method.
+ - Dropped the hardcoded Test::Kwalitee xt-test in favour of the
+   TestKwalitee plugin. ( This will hopefully get this module and all
+   dependents out of the heavy 100 )
+ - Documentation updated a bit.
+ - digest_for is now a public method.
 
 0.01022319 2010-06-01T18:03:23Z
-          Updated synopsis to recommend OO way.
-          Tests added for OO mode.
-          Replaced hash with a more pragmatic object. ( Backwards compatible ).
-          Fix tests relying on unixisms on Win(64/32)
+ - Updated synopsis to recommend OO way.
+ - Tests added for OO mode.
+ - Replaced hash with a more pragmatic object. ( Backwards compatible ).
+ - Fix tests relying on unixisms on Win(64/32)
 
 0.01021401 2010-05-23T00:16:50Z
-          use @KENTNL
-          upgrade to Dist::Zilla 2
+ - use @KENTNL
+ - upgrade to Dist::Zilla 2
 
-0.01000003 2009-10-26 02:51:22 UTC
-          First version.
+0.01000003 2009-10-26T02:51:22Z
+ - First version.
 
