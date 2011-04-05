@@ -1,6 +1,26 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Maintainence only release, no really user visible changes.
+
+ [Dependencies:Development]
+ - Advertises development bundles.
+
+ [Dependencies:Testing]
+ - Adds English
+ - Drops Test::Perl::Critic
+
+ [Packaging]
+ - move to @Author::KENTNL
+ - Ship with .perltidyrc
+ - Rework Changes into CPAN::Changes normalized form.
+ - Move perlcriticrc to perlcritic.rc
+ - ship with weaver.ini
+
+ [Tests]
+ - Drop portability tests
+ - Drop hand-coded critic tests and replace with generated.
+ - Add cpan-changes tests.
 
 0.01027622 2010-07-23T21:29:14Z
  - Dropped the hardcoded Test::Kwalitee xt-test in favour of the
