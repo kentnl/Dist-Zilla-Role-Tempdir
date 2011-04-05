@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 BEGIN {
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01027622';
+  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053720';
 }
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
@@ -125,7 +125,6 @@ has _digester => (
 );
 
 
-## no critic ( ProhibitUnusedPrivateSubroutines )
 sub _build__digester {
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
@@ -145,7 +144,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01027622
+version 0.01053720
 
 =head1 SYNOPSIS
 
@@ -238,7 +237,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric.
+This software is copyright (c) 2011 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

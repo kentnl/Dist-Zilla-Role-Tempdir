@@ -1,3 +1,4 @@
+.perltidyrc
 Build.PL
 Changes
 LICENSE
@@ -8,16 +9,17 @@ README
 dist.ini
 lib/Dist/Zilla/Role/Tempdir.pm
 lib/Dist/Zilla/Tempdir/Item.pm
-perlcriticrc
+perlcritic.rc
 t/00-compile.t
 t/000-report-versions-tiny.t
 t/01-poc.t
 t/02-poc-oo.t
 t/author-critic.t
 t/fake/dist.pm
+t/release-cpan-changes.t
 t/release-distmeta.t
 t/release-eol.t
 t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
-t/release-portability.t
+weaver.ini

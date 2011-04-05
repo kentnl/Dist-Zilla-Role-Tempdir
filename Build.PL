@@ -11,11 +11,11 @@ my %module_build_args = (
     'Dist::Zilla::Role::FileInjector' => '0',
     'Dist::Zilla::Role::InstallTool' => '0',
     'Dist::Zilla::Tester' => '0',
+    'English' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
     'Module::Build' => '0.3601',
-    'Test::More' => '0.88',
-    'Test::Perl::Critic' => '0'
+    'Test::More' => '0.88'
   },
   'configure_requires' => {
     'Module::Build' => '0.3601'
@@ -25,7 +25,7 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Dist-Zilla-Role-Tempdir',
-  'dist_version' => '0.01027622',
+  'dist_version' => '0.01053720',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Role::Tempdir',
   'recommends' => {},

@@ -1,21 +1,44 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
-0.01027622 2010-07-24 09:29:14 Pacific/Auckland
-          Dropped the hardcoded Test::Kwalitee xt-test in favour of the TestKwalitee plugin.
-            ( This will hopefully get this module and all dependents out of the heavy 100 )
-          Documentation updated a bit.
-          digest_for is now a public method.
+0.01053720 2011-04-05T19:34:41Z
+ - Maintainence only release, no really user visible changes.
 
-0.01022319 2010-06-02 06:03:23 Pacific/Auckland
-          Updated synopsis to recommend OO way.
-          Tests added for OO mode.
-          Replaced hash with a more pragmatic object. ( Backwards compatible ).
-          Fix tests relying on unixisms on Win(64/32)
+ [Dependencies:Development]
+ - Advertises development bundles.
 
-0.01021401 2010-05-23 12:16:50 Pacific/Auckland
-          use @KENTNL
-          upgrade to Dist::Zilla 2
+ [Dependencies:Testing]
+ - Adds English
+ - Drops Test::Perl::Critic
 
-0.01000003 2009-10-26 02:51:22 UTC
-          First version.
+ [Packaging]
+ - move to @Author::KENTNL
+ - Ship with .perltidyrc
+ - Rework Changes into CPAN::Changes normalized form.
+ - Move perlcriticrc to perlcritic.rc
+ - ship with weaver.ini
+
+ [Tests]
+ - Drop portability tests
+ - Drop hand-coded critic tests and replace with generated.
+ - Add cpan-changes tests.
+
+0.01027622 2010-07-23T21:29:14Z
+ - Dropped the hardcoded Test::Kwalitee xt-test in favour of the
+   TestKwalitee plugin. ( This will hopefully get this module and all
+   dependents out of the heavy 100 )
+ - Documentation updated a bit.
+ - digest_for is now a public method.
+
+0.01022319 2010-06-01T18:03:23Z
+ - Updated synopsis to recommend OO way.
+ - Tests added for OO mode.
+ - Replaced hash with a more pragmatic object. ( Backwards compatible ).
+ - Fix tests relying on unixisms on Win(64/32)
+
+0.01021401 2010-05-23T00:16:50Z
+ - use @KENTNL
+ - upgrade to Dist::Zilla 2
+
+0.01000003 2009-10-26T02:51:22Z
+ - First version.
 

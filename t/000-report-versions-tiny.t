@@ -45,7 +45,7 @@ sub pmver {
     }
 
     # So, we should be good, right?
-    return sprintf('%-40s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
+    return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
 eval { $v .= pmver('Carp','any version') };
@@ -53,9 +53,12 @@ eval { $v .= pmver('Digest::SHA','5.47') };
 eval { $v .= pmver('Digest::base','1.16') };
 eval { $v .= pmver('Dist::Zilla','2.0') };
 eval { $v .= pmver('Dist::Zilla::File::InMemory','any version') };
+eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL','1.0.0') };
+eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL::Lite','0.01009803') };
 eval { $v .= pmver('Dist::Zilla::Role::FileInjector','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::InstallTool','any version') };
 eval { $v .= pmver('Dist::Zilla::Tester','any version') };
+eval { $v .= pmver('English','any version') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Find::Rule','0.30') };
 eval { $v .= pmver('File::Slurp','9999.13') };
@@ -68,7 +71,6 @@ eval { $v .= pmver('Moose::Role','any version') };
 eval { $v .= pmver('Path::Class','0.17') };
 eval { $v .= pmver('Scalar::Util','any version') };
 eval { $v .= pmver('Test::More','0.88') };
-eval { $v .= pmver('Test::Perl::Critic','any version') };
 eval { $v .= pmver('namespace::autoclean','0.09') };
 
 
