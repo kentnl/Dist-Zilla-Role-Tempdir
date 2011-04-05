@@ -205,7 +205,6 @@ returns an instance of Digest::SHA with 512bit hashes.
 
 =cut
 
-## no critic ( ProhibitUnusedPrivateSubroutines )
 sub _build__digester {
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
