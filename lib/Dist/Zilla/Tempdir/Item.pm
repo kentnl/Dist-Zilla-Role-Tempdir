@@ -3,7 +3,10 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item;
 BEGIN {
-  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053720';
+  $Dist::Zilla::Tempdir::Item::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053721';
 }
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
@@ -96,7 +99,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 0.01053720
+version 0.01053721
 
 =head1 SYNOPSIS
 
@@ -195,7 +198,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Kent Fredric.
+This software is copyright (c) 2012 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,7 +1,34 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
+0.01053721 2012-02-02T19:54:07Z
+ - Maintenance release
+
+ [Dependencies::Changed]
+ - develop suggests : Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 ->
+   v1.2.0
+
+ [Dependencies::New]
+ - runtime requires : perl 5.006
+ - runtime requires : strict
+ - runtime requires : warnings
+
+ [Dependencies::Removed]
+ - runtime requires : Digest::base
+ - test requires : English
+
+ [Internals]
+ - Name-spaces declare $AUTHORITY
+ - Name-spaces no longer declare $VERSION in BEGIN
+
+ [Packaging]
+ - Update LICENSE ( Date, Indent, Address )
+ - extra tests moved to xt/
+ - GIT url's moved to https://
+ - Declares x_authority
+ - Versions now done via git
+
 0.01053720 2011-04-05T19:34:41Z
- - Maintainence only release, no really user visible changes.
+ - Maintenance only release, no really user visible changes.
 
  [Dependencies:Development]
  - Advertises development bundles.
