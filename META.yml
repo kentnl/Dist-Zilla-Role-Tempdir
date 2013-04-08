@@ -23,10 +23,10 @@ name: Dist-Zilla-Role-Tempdir
 provides:
   Dist::Zilla::Role::Tempdir:
     file: lib/Dist/Zilla/Role/Tempdir.pm
-    version: 0.01053722
+    version: 0.01053723
   Dist::Zilla::Tempdir::Item:
     file: lib/Dist/Zilla/Tempdir/Item.pm
-    version: 0.01053722
+    version: 0.01053723
 requires:
   Carp: 0
   Digest::SHA: 5.47
@@ -48,7 +48,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir
   repository: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir.git
-version: 0.01053722
+version: 0.01053723
 x_BuiltWith:
   modules:
     Carp: 1.28

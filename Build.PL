@@ -17,7 +17,7 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Role-Tempdir",
-  "dist_version" => "0.01053722",
+  "dist_version" => "0.01053723",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Role::Tempdir",
   "recommends" => {},

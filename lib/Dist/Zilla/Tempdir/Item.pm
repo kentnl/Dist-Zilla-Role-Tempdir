@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Tempdir::Item::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053722';
+  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053723';
 }
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
@@ -100,7 +100,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 0.01053722
+version 0.01053723
 
 =head1 SYNOPSIS
 

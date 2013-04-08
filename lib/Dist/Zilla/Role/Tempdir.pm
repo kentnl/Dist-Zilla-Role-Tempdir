@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Role::Tempdir::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053722';
+  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053723';
 }
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
@@ -147,7 +147,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01053722
+version 0.01053723
 
 =head1 SYNOPSIS
 
