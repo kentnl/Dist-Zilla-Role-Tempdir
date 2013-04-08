@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-0.01053722 2013-04-08T08:02:20Z
+0.01053722 2013-04-08T08:04:30Z
  - Maintenance Release for Module::Build 0.4004
 
  [Dependencies::Added / develop requires]
@@ -27,6 +27,7 @@
 
  [Documentation]
  - Update Copyright year
+ - Add README.mkdn
 
  [Meta]
  - Bug tracker to github issues
