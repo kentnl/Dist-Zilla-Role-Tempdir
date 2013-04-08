@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01053722 2013-04-08T08:04:30Z
  - Maintenance Release for Module::Build 0.4004
 
  [Dependencies::Added / develop requires]
