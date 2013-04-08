@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Role::Tempdir::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053721';
+  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053722';
 }
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
@@ -137,8 +137,8 @@ sub _build__digester {
 no Moose::Role;
 1;
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -147,7 +147,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01053721
+version 0.01053722
 
 =head1 SYNOPSIS
 
@@ -240,10 +240,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric.
+This software is copyright (c) 2013 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
