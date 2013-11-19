@@ -34,6 +34,8 @@ my %module_build_args = (
     "Moose" => "0.92",
     "Moose::Role" => 0,
     "Path::Class" => "0.17",
+    "Path::Iterator::Rule" => 0,
+    "Path::Tiny" => 0,
     "Scalar::Util" => 0,
     "namespace::autoclean" => "0.09",
     "perl" => "5.006",
@@ -46,6 +48,7 @@ my %module_build_args = (
     "Dist::Zilla::Role::FileInjector" => 0,
     "Dist::Zilla::Role::InstallTool" => 0,
     "Dist::Zilla::Tester" => 0,
+    "File::Slurp" => "9999.13",
     "Test::More" => "1.001002"
   }
 );
@@ -56,6 +59,7 @@ my %fallback_build_requires = (
   "Dist::Zilla::Role::FileInjector" => 0,
   "Dist::Zilla::Role::InstallTool" => 0,
   "Dist::Zilla::Tester" => 0,
+  "File::Slurp" => "9999.13",
   "Module::Build" => "0.4201",
   "Test::More" => "1.001002"
 );

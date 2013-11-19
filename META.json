@@ -94,6 +94,8 @@
             "Moose" : "0.92",
             "Moose::Role" : "0",
             "Path::Class" : "0.17",
+            "Path::Iterator::Rule" : "0",
+            "Path::Tiny" : "0",
             "Scalar::Util" : "0",
             "namespace::autoclean" : "0.09",
             "perl" : "5.006",
@@ -107,6 +109,7 @@
             "Dist::Zilla::Role::FileInjector" : "0",
             "Dist::Zilla::Role::InstallTool" : "0",
             "Dist::Zilla::Tester" : "0",
+            "File::Slurp" : "9999.13",
             "Test::More" : "1.001002"
          }
       }
@@ -118,6 +121,10 @@
       },
       "Dist::Zilla::Tempdir::Item" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item.pm",
+         "version" : "0.01053723"
+      },
+      "Dist::Zilla::Tempdir::Item::State" : {
+         "file" : "lib/Dist/Zilla/Tempdir/Item/State.pm",
          "version" : "0.01053723"
       }
    },
@@ -195,6 +202,8 @@
          "Moose" : "2.1106",
          "Moose::Role" : "2.1106",
          "Path::Class" : "0.32",
+         "Path::Iterator::Rule" : "1.006",
+         "Path::Tiny" : "0.044",
          "Pod::Coverage::TrustPod" : "0.100003",
          "Scalar::Util" : "1.35",
          "Test::CPAN::Changes" : "0.25",
@@ -356,7 +365,8 @@
                "Dist::Zilla::Plugin::Test::Compile::PerFile" : {
                   "file" : [
                      "lib/Dist/Zilla/Role/Tempdir.pm",
-                     "lib/Dist/Zilla/Tempdir/Item.pm"
+                     "lib/Dist/Zilla/Tempdir/Item.pm",
+                     "lib/Dist/Zilla/Tempdir/Item/State.pm"
                   ],
                   "path_translator" : "base64_filter",
                   "prefix" : "t/00-compile",

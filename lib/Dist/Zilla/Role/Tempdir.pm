@@ -14,10 +14,9 @@ BEGIN {
 use Moose::Role;
 use Digest::SHA;
 use File::Tempdir;
-use File::Slurp qw( write_file read_file );
-use Path::Class qw( dir file );
+use Path::Tiny qw(path);
 use File::chdir;
-use File::Find::Rule;
+use Path::Iterator::Rule;
 use Dist::Zilla::File::InMemory;
 use Dist::Zilla::Tempdir::Item;
 
@@ -38,73 +37,60 @@ sub capture_tempdir {
 
   my ( $tempdir, $dir );
   $tempdir = File::Tempdir->new();
-  $dir     = dir( $tempdir->name );
+  $dir     = path( $tempdir->name );
+
+  require Dist::Zilla::Tempdir::Item::State;
 
   my %input_files;
 
   for my $file ( @{ $dzil->files } ) {
-    my ( $name, $content, ) = ( $file->name, $file->content, );
-
-    $input_files{ $file->name } = {
-      hash => $self->digest_for( \$content ),
-      file => $file,
-    };
-
-    my ($tmpfile) = $dir->file($name);
-    $tmpfile->dir->mkpath(1);
-    write_file( $tmpfile->absolute->stringify, \$content );
+    my $state = Dist::Zilla::Tempdir::Item::State->new(
+      file           => $file,
+      storage_prefix => $dir,
+    );
+    $state->write_out;
+    $input_files{ $state->name } = $state;
   }
   {
     ## no critic ( ProhibitLocalVars )
     local $CWD = $dir;
     $code->();
   }
-  my (@files) = File::Find::Rule->file->in($dir);
+
+  my (@files) = Path::Iterator::Rule->new->file->all($dir);
 
   my %output_files;
 
-  for ( keys %input_files ) {
-    $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
-      name => $_,
-      file => $input_files{$_}->{file},
-    );
-    $output_files{$_}->set_deleted;
+  for my $file ( values %input_files ) {
+    my $update_item = Dist::Zilla::Tempdir::Item->new( name => $_->name, file => $_->file, );
+    $update_item->set_original;
+
+    if ( not $file->on_disk ) {
+      $update_item->set_deleted;
+    }
+    elsif ( $file->on_disk_changed ) {
+      $update_item->set_modified;
+      my %params = ( name => $file->name, content => $file->new_content );
+      if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
+        $params{encoded_content} = delete $params{content};
+      }
+      $update_item->file( Dist::Zilla::File::InMemory->new(%params) );
+    }
+    $output_files{ $file->name } = $update_item;
   }
 
   for my $filename (@files) {
-
-    my $shortname = file($filename)->relative($dir)->stringify;
-    my $content   = file($filename)->slurp;
-    my $hash      = $self->digest_for( \$content );
-
-    if ( exists $input_files{$shortname} ) {
-
-      # FILE NOT MODIFIED, (O)riginal
-
-      if ( $input_files{$shortname}->{hash} eq $hash ) {
-        $output_files{$shortname}->set_original;
-        $output_files{$shortname}->file( $input_files{$shortname}->{file} );
-        next;
-      }
-
-      # FILE (M)odified
-      $output_files{$shortname}->set_modified;
-      $output_files{$shortname}->file(
-        Dist::Zilla::File::InMemory->new(
-          name    => $shortname,
-          content => $content,
-        )
-      );
-      next;
-    }
+    my $shortname = path($filename)->relative($dir);
+    next if exists $output_files{$shortname};
 
     # FILE (N)ew
+    my %params = ( name => $shortname, content => $content );
+    if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
+      $params{encoded_content} = delete $params{content};
+    }
     $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
       name => $shortname,
-      file => Dist::Zilla::File::InMemory->new(
-        name    => $shortname,
-        content => $content,
-      ),
+      file => Dist::Zilla::File::InMemory->new(%params)
     );
     $output_files{$shortname}->set_new;
   }
