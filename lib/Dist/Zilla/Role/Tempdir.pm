@@ -6,15 +6,8 @@ package Dist::Zilla::Role::Tempdir;
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 use Moose::Role;
-use Digest::SHA;
-use File::Tempdir;
-use File::Slurp qw( write_file read_file );
-use Path::Class qw( dir file );
+use Path::Tiny qw(path);
 use File::chdir;
-use File::Find::Rule;
-use Dist::Zilla::File::InMemory;
-use Dist::Zilla::Tempdir::Item;
-
 use namespace::autoclean;
 
 =head1 SYNOPSIS
@@ -84,130 +77,72 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my ($dzil);
+  my ( $dzil, $tempdir );
 
-  $dzil = $self->zilla;
+  require File::Tempdir;
 
-  my ( $tempdir, $dir );
   $tempdir = File::Tempdir->new();
-  $dir     = dir( $tempdir->name );
 
   my %input_files;
 
+  $dzil = $self->zilla;
+
   for my $file ( @{ $dzil->files } ) {
-    my ( $name, $content, ) = ( $file->name, $file->content, );
-
-    $input_files{ $file->name } = {
-      hash => $self->digest_for( \$content ),
-      file => $file,
-    };
-
-    my ($tmpfile) = $dir->file($name);
-    $tmpfile->dir->mkpath(1);
-    write_file( $tmpfile->absolute->stringify, \$content );
+    require Dist::Zilla::Tempdir::Item::State;
+    my $state = Dist::Zilla::Tempdir::Item::State->new(
+      file           => $file,
+      storage_prefix => $tempdir->name,
+    );
+    $state->write_out;
+    $input_files{ $state->name } = $state;
   }
   {
     ## no critic ( ProhibitLocalVars )
-    local $CWD = $dir;
+    local $CWD = $tempdir->name;
     $code->();
   }
-  my (@files) = File::Find::Rule->file->in($dir);
 
   my %output_files;
 
-  for ( keys %input_files ) {
-    $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
-      name => $_,
-      file => $input_files{$_}->{file},
-    );
-    $output_files{$_}->set_deleted;
-  }
+  require Dist::Zilla::Tempdir::Item;
+  require Dist::Zilla::File::InMemory;
 
-  for my $filename (@files) {
+  for my $file ( values %input_files ) {
+    my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
+    $update_item->set_original;
 
-    my $shortname = file($filename)->relative($dir)->stringify;
-    my $content   = file($filename)->slurp;
-    my $hash      = $self->digest_for( \$content );
-
-    if ( exists $input_files{$shortname} ) {
-
-      # FILE NOT MODIFIED, (O)riginal
-
-      if ( $input_files{$shortname}->{hash} eq $hash ) {
-        $output_files{$shortname}->set_original;
-        $output_files{$shortname}->file( $input_files{$shortname}->{file} );
-        next;
-      }
-
-      # FILE (M)odified
-      $output_files{$shortname}->set_modified;
-      $output_files{$shortname}->file(
-        Dist::Zilla::File::InMemory->new(
-          name    => $shortname,
-          content => $content,
-        )
-      );
-      next;
+    if ( not $file->on_disk ) {
+      $update_item->set_deleted;
     }
+    elsif ( $file->on_disk_changed ) {
+      $update_item->set_modified;
+      my %params = ( name => $file->name, content => $file->new_content );
+      if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
+        $params{encoded_content} = delete $params{content};
+      }
+      $update_item->file( Dist::Zilla::File::InMemory->new(%params) );
+    }
+    $output_files{ $file->name } = $update_item;
+  }
+  require Path::Iterator::Rule;
+  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->name ) ) {
+    my $fullpath  = path($filename);
+    my $shortname = $fullpath->relative( $tempdir->name );
+    next if exists $output_files{$shortname};
 
     # FILE (N)ew
+    my %params = ( name => "$shortname", content => $fullpath->slurp_raw );
+    if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
+      $params{encoded_content} = delete $params{content};
+    }
     $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
-      name => $shortname,
-      file => Dist::Zilla::File::InMemory->new(
-        name    => $shortname,
-        content => $content,
-      ),
+      name => "$shortname",
+      file => Dist::Zilla::File::InMemory->new(%params)
     );
     $output_files{$shortname}->set_new;
   }
 
   return values %output_files;
-}
-
-=head2 digest_for
-
-  my $hash = $self->digest_for( \$content );
-
-Hashes content and returns the result in b64.
-
-=cut
-
-sub digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
-}
-
-=head1 PRIVATE ATTRIBUTES
-
-=head2 _digester
-
-  isa => Digest::base,
-  is  => rw,
-  lazy_build => 1
-
-Used for Digesting the contents of files.
-
-=cut
-
-has _digester => (
-  isa        => 'Digest::base',
-  is         => 'rw',
-  lazy_build => 1,
-);
-
-=head1 PRIVATE METHODS
-
-=head2 _build__digester
-
-returns an instance of Digest::SHA with 512bit hashes.
-
-=cut
-
-sub _build__digester {
-  ## no critic ( ProhibitMagicNumbers )
-  return Digest::SHA->new(512);
 }
 
 =head1 SEE ALSO
