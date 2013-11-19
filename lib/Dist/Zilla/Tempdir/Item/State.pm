@@ -29,10 +29,6 @@ has 'storage_prefix' => ( is => ro =>, required => 1 );
 
 has '_digester' => ( is => ro =>, required => 1 );
 
-sub name {
-  my ($self) = @_;
-  return $self->file->name;
-}
 
 sub _digest_for {
   my ( $self, $content ) = @_;
