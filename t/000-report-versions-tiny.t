@@ -55,7 +55,6 @@ eval { $v .= pmver('Dist::Zilla::File::InMemory','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::FileInjector','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::InstallTool','any version') };
 eval { $v .= pmver('Dist::Zilla::Tester','any version') };
-eval { $v .= pmver('File::Slurp','any version') };
 eval { $v .= pmver('File::Tempdir','0.02') };
 eval { $v .= pmver('File::chdir','0.1002') };
 eval { $v .= pmver('Module::Build','0.4201') };

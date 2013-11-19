@@ -45,7 +45,6 @@ my %module_build_args = (
     "Dist::Zilla::Role::FileInjector" => 0,
     "Dist::Zilla::Role::InstallTool" => 0,
     "Dist::Zilla::Tester" => 0,
-    "File::Slurp" => 0,
     "Test::More" => "1.001002"
   }
 );
@@ -56,7 +55,6 @@ my %fallback_build_requires = (
   "Dist::Zilla::Role::FileInjector" => 0,
   "Dist::Zilla::Role::InstallTool" => 0,
   "Dist::Zilla::Tester" => 0,
-  "File::Slurp" => 0,
   "Module::Build" => "0.4201",
   "Test::More" => "1.001002"
 );

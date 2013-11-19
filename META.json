@@ -106,7 +106,6 @@
             "Dist::Zilla::Role::FileInjector" : "0",
             "Dist::Zilla::Role::InstallTool" : "0",
             "Dist::Zilla::Tester" : "0",
-            "File::Slurp" : "0",
             "Test::More" : "1.001002"
          }
       }
@@ -191,7 +190,6 @@
          "Dist::Zilla::Role::FileInjector" : "5.006",
          "Dist::Zilla::Role::InstallTool" : "5.006",
          "Dist::Zilla::Tester" : "5.006",
-         "File::Slurp" : "9999.19",
          "File::Tempdir" : "0.02",
          "File::chdir" : "0.1008",
          "Module::Build" : "0.4201",

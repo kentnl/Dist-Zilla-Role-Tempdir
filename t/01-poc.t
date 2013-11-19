@@ -55,8 +55,8 @@ my $plug = Dist::Zilla::Plugin::TestTempDir->new(
 
 my (@files) = $plug->capture_tempdir(
   sub {
-    use File::Slurp qw( write_file );
-    write_file( 'example2.pm', "# ABSTRACT: A Sample Generated File" );
+    use Path::Tiny qw(path);
+    path( 'example2.pm')->spew_raw("# ABSTRACT: A Sample Generated File");
     system('echo ANOTHER GENERATED FILE > example.pm');
   }
 );
@@ -72,10 +72,11 @@ is( $epm->{status}, 'N', 'New file example.pm appeared' );
 
 @files = $plug->capture_tempdir(
   sub {
-#    system("cmd");
-    system($^X, '-we', 'unlink q{dist.pm}') and die;
-#    print "done!\n";
-#    system("cmd");
+    #    system("cmd");
+    system( $^X, '-we', 'unlink q{dist.pm}' ) and die;
+
+    #    print "done!\n";
+    #    system("cmd");
   }
 );
 

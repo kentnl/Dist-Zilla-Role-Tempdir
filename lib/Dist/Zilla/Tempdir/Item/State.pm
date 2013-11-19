@@ -65,7 +65,7 @@ sub _encoded_content {
 }
 
 sub _relpath {
-  my ($self)   = @_;
+  my ($self) = @_;
   require Path::Tiny;
   my $d        = Path::Tiny->new( $self->storage_prefix );
   my $out_path = $d->child( $self->file->name );
