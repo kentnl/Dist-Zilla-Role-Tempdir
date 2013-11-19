@@ -63,6 +63,7 @@ sub _build_new_content {
   my ($self) = @_;
   return unless $self->on_disk;
   $self->_relpath->slurp_raw();
+  return;
 }
 
 sub _build_new_hash {
@@ -91,6 +92,7 @@ sub write_out {
   my $out_path = $self->_relpath();
   $out_path->parent->mkpath(1);
   $out_path->spew_raw( $self->_encoded_content );
+  return;
 }
 
 
@@ -140,7 +142,7 @@ Returns true if C<file> exists in C<storage_prefix>
 =head2 C<on_disk_changed>
 
 Returns true if the file is on disk, and the on-disk hash
-doesn't match the pre-write-out hash.
+doesn't match the written out C<file>'s hash.
 
 =head1 ATTRIBUTES
 
