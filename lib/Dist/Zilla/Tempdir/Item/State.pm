@@ -13,7 +13,9 @@ BEGIN {
 
 use Moose;
 
+
 has 'hash' => ( is => ro =>, lazy_build => 1 );
+
 
 has 'file' => (
   is       => ro =>,
@@ -21,12 +23,23 @@ has 'file' => (
   handles => { name => name => },
 );
 
+
 has 'new_content' => ( is => ro =>, lazy_build => 1 );
+
+
 has 'new_hash'    => ( is => ro =>, lazy_build => 1 );
+
 
 has 'storage_prefix' => ( is => ro =>, required => 1 );
 
 has '_digester' => ( is => ro =>, lazy_build => 1 );
+
+
+sub BUILD {
+    my ( $self ) = @_;
+    $self->hash;
+    return;
+}
 
 sub _build__digester {
   require Digest::SHA;
@@ -72,6 +85,7 @@ sub _relpath {
   return $out_path;
 }
 
+
 sub write_out {
   my ($self) = @_;
   my $out_path = $self->_relpath();
@@ -79,11 +93,13 @@ sub write_out {
   $out_path->spew_raw( $self->_encoded_content );
 }
 
+
 sub on_disk {
   my ($self) = @_;
   my $out_path = $self->_relpath();
   return -e $out_path;
 }
+
 
 sub on_disk_changed {
   my ($self) = @_;
@@ -106,6 +122,47 @@ Dist::Zilla::Tempdir::Item::State - Intermediate state for a file
 =head1 VERSION
 
 version 0.01053723
+
+=head1 METHODS
+
+=head2 C<BUILD>
+
+Ensures C<hash> is populated at build time.
+
+=head2 C<write_out>
+
+Emits C<file> into C<storage_prefix>
+
+=head2 C<on_disk>
+
+Returns true if C<file> exists in C<storage_prefix>
+
+=head2 C<on_disk_changed>
+
+Returns true if the file is on disk, and the on-disk hash
+doesn't match the pre-write-out hash.
+
+=head1 ATTRIBUTES
+
+=head2 C<hash>
+
+Provides a digest hash of C<file>'s content
+
+=head2 C<file>
+
+A C<Dist::Zilla::File>
+
+=head2 C<new_content>
+
+Content of C<storage_prefix>/C<file> read from disk.
+
+=head2 C<new_hash>
+
+Hash of C<new_content>
+
+=head2 C<storage_prefix>
+
+The root directory to write this file out to, and to read it from.
 
 =head1 AUTHOR
 
