@@ -10,7 +10,8 @@ dist.ini
 lib/Dist/Zilla/Role/Tempdir.pm
 lib/Dist/Zilla/Tempdir/Item.pm
 perlcritic.rc
-t/00-compile.t
+t/00-compile/lib_Dist_Zilla_Role_Tempdir_pm.t
+t/00-compile/lib_Dist_Zilla_Tempdir_Item_pm.t
 t/000-report-versions-tiny.t
 t/01-poc.t
 t/02-poc-oo.t

@@ -7,10 +7,10 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4201"
   },
   "configure_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4201"
   },
   "dist_abstract" => "Shell Out and collect the result in a DZ plug-in.",
   "dist_author" => [
@@ -42,28 +42,28 @@ my %module_build_args = (
   },
   "script_files" => [],
   "test_requires" => {
-    "Dist::Zilla" => 0,
+    "Dist::Zilla" => "2.0",
     "Dist::Zilla::Role::FileInjector" => 0,
     "Dist::Zilla::Role::InstallTool" => 0,
     "Dist::Zilla::Tester" => 0,
-    "File::Find" => 0,
-    "File::Temp" => 0,
-    "Test::More" => "0.98"
+    "Test::More" => "1.001002"
   }
 );
 
 
+my %fallback_build_requires = (
+  "Dist::Zilla" => "2.0",
+  "Dist::Zilla::Role::FileInjector" => 0,
+  "Dist::Zilla::Role::InstallTool" => 0,
+  "Dist::Zilla::Tester" => 0,
+  "Module::Build" => "0.4201",
+  "Test::More" => "1.001002"
+);
+
+
 unless ( eval { Module::Build->VERSION(0.4004) } ) {
-  my $tr = delete $module_build_args{test_requires};
-  my $br = $module_build_args{build_requires};
-  for my $mod ( keys %$tr ) {
-    if ( exists $br->{$mod} ) {
-      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
-    }
-    else {
-      $br->{$mod} = $tr->{$mod};
-    }
-  }
+  delete $module_build_args{test_requires};
+  $module_build_args{build_requires} = \%fallback_build_requires;
 }
 
 my $build = Module::Build->new(%module_build_args);
