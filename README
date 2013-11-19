@@ -62,23 +62,6 @@ METHODS
 
     Make sure to look at "Dist::Zilla::Tempdir::Item" for usage.
 
-  digest_for
-      my $hash = $self->digest_for( \$content );
-
-    Hashes content and returns the result in b64.
-
-PRIVATE ATTRIBUTES
-  _digester
-      isa => Digest::base,
-      is  => rw,
-      lazy_build => 1
-
-    Used for Digesting the contents of files.
-
-PRIVATE METHODS
-  _build__digester
-    returns an instance of Digest::SHA with 512bit hashes.
-
 SEE ALSO
     *   "Dist::Zilla::Tempdir::Item"
 

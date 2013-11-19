@@ -99,27 +99,6 @@ sub capture_tempdir {
 }
 
 
-sub digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
-}
-
-
-has _digester => (
-  isa        => 'Digest::base',
-  is         => 'rw',
-  lazy_build => 1,
-);
-
-
-sub _build__digester {
-  ## no critic ( ProhibitMagicNumbers )
-  return Digest::SHA->new(512);
-}
-
-
 no Moose::Role;
 1;
 
@@ -189,28 +168,6 @@ Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
     }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
 
 Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
-
-=head2 digest_for
-
-  my $hash = $self->digest_for( \$content );
-
-Hashes content and returns the result in b64.
-
-=head1 PRIVATE ATTRIBUTES
-
-=head2 _digester
-
-  isa => Digest::base,
-  is  => rw,
-  lazy_build => 1
-
-Used for Digesting the contents of files.
-
-=head1 PRIVATE METHODS
-
-=head2 _build__digester
-
-returns an instance of Digest::SHA with 512bit hashes.
 
 =head1 SEE ALSO
 
