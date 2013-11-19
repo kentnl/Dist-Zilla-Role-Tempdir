@@ -55,8 +55,8 @@ my $plug = Dist::Zilla::Plugin::TestTempDir->new(
 
 my (@files) = $plug->capture_tempdir(
   sub {
-    use File::Slurp qw( write_file );
-    write_file( 'example2.pm', "# ABSTRACT: A Sample Generated File" );
+    use Path::Tiny qw(path);
+    path('example2.pm')->spew_raw("# ABSTRACT: A Sample Generated File");
     system('echo ANOTHER GENERATED FILE > example.pm');
   }
 );
