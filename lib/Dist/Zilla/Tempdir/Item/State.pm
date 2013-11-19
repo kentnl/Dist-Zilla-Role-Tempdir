@@ -30,6 +30,7 @@ has 'storage_prefix' => ( is => ro =>, required => 1 );
 has '_digester' => ( is => ro =>, lazy_build => 1 );
 
 sub _build__digester {
+  require Digest::SHA;
   ## no critic ( ProhibitMagicNumbers )
   return Digest::SHA->new(512);
 }
