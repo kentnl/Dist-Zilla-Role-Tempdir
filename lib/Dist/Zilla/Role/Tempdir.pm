@@ -84,12 +84,12 @@ sub capture_tempdir {
     next if exists $output_files{$shortname};
 
     # FILE (N)ew
-    my %params = ( name => $shortname, content => $content );
+    my %params = ( name => $shortname, content => $shortname->slurp_raw );
     if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
       $params{encoded_content} = delete $params{content};
     }
     $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
-      name => $shortname,
+       name => $shortname,
       file => Dist::Zilla::File::InMemory->new(%params)
     );
     $output_files{$shortname}->set_new;
