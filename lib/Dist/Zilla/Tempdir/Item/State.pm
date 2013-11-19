@@ -85,6 +85,10 @@ sub on_disk_changed {
   return $self->hash ne $self->new_hash;
 }
 
+no Moose;
+__PACKAGE__->meta->make_immutable;
+1;
+
 __END__
 
 =pod
