@@ -6,10 +6,11 @@ package Dist::Zilla::Tempdir::Item;
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
 use Moose;
-use Carp qw( croak );
-use Scalar::Util qw( blessed );
 
 use namespace::autoclean;
+
+sub _croak   { require Carp;         goto &Carp::croak }
+sub _blessed { require Scalar::Util; goto &Scalar::Util::blessed }
 
 =head1 SYNOPSIS
 
@@ -101,19 +102,15 @@ sub _mk_status {
 
   my $setter = sub {
     my $self = shift;
-    croak $name . 'is an instance method, not a class method'
-      unless blessed($self);
-    croak 'too many arguments ( 0 expected ) to ->' . $name
-      if @_;
+    return _croak( $name . 'is an instance method, not a class method' ) unless _blessed($self);
+    return _croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status($value);
   };
 
   my $getter = sub {
     my $self = shift;
-    croak $name . 'is an instance method, not a class method'
-      unless blessed($self);
-    croak 'too many arguments ( 0 expected ) to ->' . $name
-      if @_;
+    return _croak( $name . 'is an instance method, not a class method' ) unless _blessed($self);
+    return _croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status() eq $value;
   };
 
