@@ -14,7 +14,6 @@ BEGIN {
 use Moose::Role;
 use Path::Tiny qw(path);
 use File::chdir;
-
 use namespace::autoclean;
 
 
@@ -26,19 +25,18 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my ($dzil,$tempdir);
+  my ( $dzil, $tempdir );
 
   require File::Tempdir;
 
   $tempdir = File::Tempdir->new();
-
-  require Dist::Zilla::Tempdir::Item::State;
 
   my %input_files;
 
   $dzil = $self->zilla;
 
   for my $file ( @{ $dzil->files } ) {
+    require Dist::Zilla::Tempdir::Item::State;
     my $state = Dist::Zilla::Tempdir::Item::State->new(
       file           => $file,
       storage_prefix => $tempdir->name,
@@ -56,7 +54,7 @@ sub capture_tempdir {
 
   require Dist::Zilla::Tempdir::Item;
   require Dist::Zilla::File::InMemory;
- 
+
   for my $file ( values %input_files ) {
     my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
     $update_item->set_original;
@@ -75,9 +73,9 @@ sub capture_tempdir {
     $output_files{ $file->name } = $update_item;
   }
   require Path::Iterator::Rule;
-  for my $filename (Path::Iterator::Rule->new->file->all($tempdir->name)) {
+  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->name ) ) {
     my $fullpath  = path($filename);
-    my $shortname = $fullpath->relative($tempdir->name);
+    my $shortname = $fullpath->relative( $tempdir->name );
     next if exists $output_files{$shortname};
 
     # FILE (N)ew
