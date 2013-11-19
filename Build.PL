@@ -27,13 +27,10 @@ my %module_build_args = (
     "Digest::SHA" => "5.47",
     "Dist::Zilla" => "2.0",
     "Dist::Zilla::File::InMemory" => 0,
-    "File::Find::Rule" => "0.30",
-    "File::Slurp" => "9999.13",
     "File::Tempdir" => "0.02",
     "File::chdir" => "0.1002",
     "Moose" => "0.92",
     "Moose::Role" => 0,
-    "Path::Class" => "0.17",
     "Path::Iterator::Rule" => 0,
     "Path::Tiny" => 0,
     "Scalar::Util" => 0,
@@ -48,7 +45,7 @@ my %module_build_args = (
     "Dist::Zilla::Role::FileInjector" => 0,
     "Dist::Zilla::Role::InstallTool" => 0,
     "Dist::Zilla::Tester" => 0,
-    "File::Slurp" => "9999.13",
+    "File::Slurp" => 0,
     "Test::More" => "1.001002"
   }
 );
@@ -59,7 +56,7 @@ my %fallback_build_requires = (
   "Dist::Zilla::Role::FileInjector" => 0,
   "Dist::Zilla::Role::InstallTool" => 0,
   "Dist::Zilla::Tester" => 0,
-  "File::Slurp" => "9999.13",
+  "File::Slurp" => 0,
   "Module::Build" => "0.4201",
   "Test::More" => "1.001002"
 );
