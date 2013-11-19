@@ -62,7 +62,7 @@ sub capture_tempdir {
   my %output_files;
 
   for my $file ( values %input_files ) {
-    my $update_item = Dist::Zilla::Tempdir::Item->new( name => $_->name, file => $_->file, );
+    my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
     $update_item->set_original;
 
     if ( not $file->on_disk ) {
