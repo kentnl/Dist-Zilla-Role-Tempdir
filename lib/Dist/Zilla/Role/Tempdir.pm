@@ -5,6 +5,8 @@ package Dist::Zilla::Role::Tempdir;
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
+# AUTHORITY
+
 use Moose::Role;
 use Path::Tiny qw(path);
 use File::chdir;

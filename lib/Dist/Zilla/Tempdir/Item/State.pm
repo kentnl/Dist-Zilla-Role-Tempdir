@@ -5,6 +5,8 @@ package Dist::Zilla::Tempdir::Item::State;
 
 # ABSTRACT: Intermediate state for a file
 
+# AUTHORITY
+
 use Moose;
 
 =attr C<hash>

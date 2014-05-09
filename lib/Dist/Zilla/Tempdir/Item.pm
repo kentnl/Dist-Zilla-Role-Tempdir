@@ -5,6 +5,8 @@ package Dist::Zilla::Tempdir::Item;
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
+# AUTHORITY
+
 use Moose;
 
 use namespace::autoclean;
