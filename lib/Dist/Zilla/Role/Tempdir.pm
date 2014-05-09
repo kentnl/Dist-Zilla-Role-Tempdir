@@ -81,9 +81,7 @@ sub capture_tempdir {
 
   my ( $dzil, $tempdir );
 
-  require File::Tempdir;
-
-  $tempdir = File::Tempdir->new();
+  $tempdir = Path::Tiny->tempdir;
 
   my %input_files;
 
@@ -93,14 +91,14 @@ sub capture_tempdir {
     require Dist::Zilla::Tempdir::Item::State;
     my $state = Dist::Zilla::Tempdir::Item::State->new(
       file           => $file,
-      storage_prefix => $tempdir->name,
+      storage_prefix => $tempdir->absolute,
     );
     $state->write_out;
     $input_files{ $state->name } = $state;
   }
   {
     ## no critic ( ProhibitLocalVars )
-    local $CWD = $tempdir->name;
+    local $CWD = $tempdir->absolute->stringify;
     $code->();
   }
 
@@ -127,9 +125,9 @@ sub capture_tempdir {
     $output_files{ $file->name } = $update_item;
   }
   require Path::Iterator::Rule;
-  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->name ) ) {
+  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->absolute->stringify ) ) {
     my $fullpath  = path($filename);
-    my $shortname = $fullpath->relative( $tempdir->name );
+    my $shortname = $fullpath->relative( $tempdir->absolute->stringify );
     next if exists $output_files{$shortname};
 
     # FILE (N)ew
