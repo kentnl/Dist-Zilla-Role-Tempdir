@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-0.01053723 2013-11-19T08:05:32Z
+0.010537 2014-05-09T14:14:09Z
  [00 Major]
  - DZil Encoding support added.
  - Internals overhauled to use newer things.

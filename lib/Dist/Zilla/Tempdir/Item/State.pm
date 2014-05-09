@@ -2,19 +2,23 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
-BEGIN {
-  $Dist::Zilla::Tempdir::Item::State::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Tempdir::Item::State::VERSION = '0.01053723';
-}
-
+$Dist::Zilla::Tempdir::Item::State::VERSION = '0.010537';
 # ABSTRACT: Intermediate state for a file
 
 use Moose;
 
 
+
+
+
+
+
 has 'hash' => ( is => ro =>, lazy_build => 1 );
+
+
+
+
+
 
 
 has 'file' => (
@@ -24,10 +28,25 @@ has 'file' => (
 );
 
 
+
+
+
+
+
 has 'new_content' => ( is => ro =>, lazy_build => 1 );
 
 
-has 'new_hash'    => ( is => ro =>, lazy_build => 1 );
+
+
+
+
+
+has 'new_hash' => ( is => ro =>, lazy_build => 1 );
+
+
+
+
+
 
 
 has 'storage_prefix' => ( is => ro =>, required => 1 );
@@ -35,10 +54,15 @@ has 'storage_prefix' => ( is => ro =>, required => 1 );
 has '_digester' => ( is => ro =>, lazy_build => 1 );
 
 
+
+
+
+
+
 sub BUILD {
-    my ( $self ) = @_;
-    $self->hash;
-    return;
+  my ($self) = @_;
+  $self->hash;
+  return;
 }
 
 sub _build__digester {
@@ -87,6 +111,11 @@ sub _relpath {
 }
 
 
+
+
+
+
+
 sub write_out {
   my ($self) = @_;
   my $out_path = $self->_relpath();
@@ -96,11 +125,22 @@ sub write_out {
 }
 
 
+
+
+
+
+
 sub on_disk {
   my ($self) = @_;
   my $out_path = $self->_relpath();
   return -e $out_path;
 }
+
+
+
+
+
+
 
 
 sub on_disk_changed {
@@ -123,7 +163,7 @@ Dist::Zilla::Tempdir::Item::State - Intermediate state for a file
 
 =head1 VERSION
 
-version 0.01053723
+version 0.010537
 
 =head1 METHODS
 
@@ -172,7 +212,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric.
+This software is copyright (c) 2014 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

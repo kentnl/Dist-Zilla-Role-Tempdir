@@ -2,19 +2,71 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Tempdir;
-BEGIN {
-  $Dist::Zilla::Role::Tempdir::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053723';
-}
-
+$Dist::Zilla::Role::Tempdir::VERSION = '0.010537';
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 use Moose::Role;
 use Path::Tiny qw(path);
 use File::chdir;
 use namespace::autoclean;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -94,6 +146,15 @@ sub capture_tempdir {
 }
 
 
+
+
+
+
+
+
+
+
+
 no Moose::Role;
 1;
 
@@ -107,7 +168,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01053723
+version 0.010537
 
 =head1 SYNOPSIS
 
@@ -178,7 +239,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric.
+This software is copyright (c) 2014 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

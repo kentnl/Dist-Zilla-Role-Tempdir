@@ -2,21 +2,55 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item;
-BEGIN {
-  $Dist::Zilla::Tempdir::Item::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053723';
-}
-
+$Dist::Zilla::Tempdir::Item::VERSION = '0.010537';
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
 use Moose;
 
 use namespace::autoclean;
 
-sub _croak   { require Carp;         goto &Carp::croak }
-sub _blessed { require Scalar::Util; goto &Scalar::Util::blessed }
+use Carp qw(croak);
+use Scalar::Util qw( blessed );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,18 +63,33 @@ has 'status' => (
 );
 
 
+
+
+
+
+
+
+
+
+
+
+
 has 'file' => (
   isa      => 'Dist::Zilla::Role::File',
   required => 1,
   is       => 'rw',
+  handles  => { name => 'name' },
 );
 
 
-has 'name' => (
-  isa      => 'Str',
-  required => 1,
-  is       => 'rw',
-);
+
+
+
+
+
+has 'storage_prefix' => ( is => ro =>, required => 1 );
+
+has '_digester' => ( is => ro =>, lazy_build => 1 );
 
 sub _mk_status {
   my $name  = shift;
@@ -48,15 +97,15 @@ sub _mk_status {
 
   my $setter = sub {
     my $self = shift;
-    return _croak( $name . 'is an instance method, not a class method' ) unless _blessed($self);
-    return _croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
+    return croak( $name . 'is an instance method, not a class method' ) unless blessed($self);
+    return croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status($value);
   };
 
   my $getter = sub {
     my $self = shift;
-    return _croak( $name . 'is an instance method, not a class method' ) unless _blessed($self);
-    return _croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
+    return croak( $name . 'is an instance method, not a class method' ) unless blessed($self);
+    return croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status() eq $value;
   };
 
@@ -70,13 +119,52 @@ sub _mk_status {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 _mk_status( 'modified', 'M' );
+
+
+
+
+
+
+
+
+
 
 
 _mk_status( 'original', 'O' );
 
 
+
+
+
+
+
+
+
+
+
+
 _mk_status( 'new', 'N' );
+
+
+
+
+
+
+
+
+
 
 
 _mk_status( 'deleted', 'D' );
@@ -97,7 +185,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 0.01053723
+version 0.010537
 
 =head1 SYNOPSIS
 
@@ -124,6 +212,12 @@ algorithm to test for modification.
 
 =head1 ATTRIBUTES
 
+=head2 C<storage_prefix>
+
+The root directory to write this file out to, and to read it from.
+
+=head1 ATTRIBUTES
+
 =head2 status
 
   isa => Str,
@@ -146,14 +240,6 @@ be 2 characters to represent different parts of state, I probably will not do th
 This is the Dist::Zilla::File::* item which we refer to. For items that C<is_deleted>, C<file> is likely to be the file before it got deleted.
 
 For C<is_new> and C<is_original> files, the item is the file itself, and for C<is_modified>, its the modified version of the file.
-
-=head2 name
-
-  isa      => Str,
-  required => 1,
-  is       => rw,
-
-This is the path to the file relative to the dist root.
 
 =head1 METHODS
 
@@ -196,7 +282,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric.
+This software is copyright (c) 2014 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
