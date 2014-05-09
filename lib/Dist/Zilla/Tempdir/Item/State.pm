@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
-$Dist::Zilla::Tempdir::Item::State::VERSION = '0.010537';
+$Dist::Zilla::Tempdir::Item::State::VERSION = '1.000000';
 # ABSTRACT: Intermediate state for a file
 
 use Moose;
@@ -163,7 +163,7 @@ Dist::Zilla::Tempdir::Item::State - Intermediate state for a file
 
 =head1 VERSION
 
-version 0.010537
+version 1.000000
 
 =head1 METHODS
 

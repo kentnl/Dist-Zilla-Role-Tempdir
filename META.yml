@@ -24,13 +24,13 @@ name: Dist-Zilla-Role-Tempdir
 provides:
   Dist::Zilla::Role::Tempdir:
     file: lib/Dist/Zilla/Role/Tempdir.pm
-    version: '0.010537'
+    version: '1.000000'
   Dist::Zilla::Tempdir::Item:
     file: lib/Dist/Zilla/Tempdir/Item.pm
-    version: '0.010537'
+    version: '1.000000'
   Dist::Zilla::Tempdir::Item::State:
     file: lib/Dist/Zilla/Tempdir/Item/State.pm
-    version: '0.010537'
+    version: '1.000000'
 requires:
   Carp: '0'
   Digest::SHA: '5.47'
@@ -51,7 +51,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir
   repository: https://github.com/kentfredric/Dist-Zilla-Role-Tempdir.git
-version: '0.010537'
+version: '1.000000'
 x_BuiltWith:
   failures:
     File::Tempdir: 'module was not found in INC'
@@ -444,7 +444,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: 0.010537-source
+          tag: 1.000000-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
@@ -489,7 +489,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: 0
-          tag: '0.010537'
+          tag: '1.000000'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local

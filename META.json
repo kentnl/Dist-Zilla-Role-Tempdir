@@ -119,15 +119,15 @@
    "provides" : {
       "Dist::Zilla::Role::Tempdir" : {
          "file" : "lib/Dist/Zilla/Role/Tempdir.pm",
-         "version" : "0.010537"
+         "version" : "1.000000"
       },
       "Dist::Zilla::Tempdir::Item" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item.pm",
-         "version" : "0.010537"
+         "version" : "1.000000"
       },
       "Dist::Zilla::Tempdir::Item::State" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item/State.pm",
-         "version" : "0.010537"
+         "version" : "1.000000"
       }
    },
    "release_status" : "stable",
@@ -142,7 +142,7 @@
          "web" : "https://github.com/kentfredric/Dist-Zilla-Role-Tempdir"
       }
    },
-   "version" : "0.010537",
+   "version" : "1.000000",
    "x_BuiltWith" : {
       "failures" : {
          "File::Tempdir" : "module was not found in INC"
@@ -631,7 +631,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "0.010537-source",
+                  "tag" : "1.000000-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -690,7 +690,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : "releases",
                   "signed" : 0,
-                  "tag" : "0.010537",
+                  "tag" : "1.000000",
                   "tag_format" : "%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"

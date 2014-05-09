@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item;
-$Dist::Zilla::Tempdir::Item::VERSION = '0.010537';
+$Dist::Zilla::Tempdir::Item::VERSION = '1.000000';
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
 use Moose;
@@ -185,7 +185,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 0.010537
+version 1.000000
 
 =head1 SYNOPSIS
 

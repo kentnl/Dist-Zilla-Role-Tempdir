@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Tempdir;
-$Dist::Zilla::Role::Tempdir::VERSION = '0.010537';
+$Dist::Zilla::Role::Tempdir::VERSION = '1.000000';
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 use Moose::Role;
@@ -168,7 +168,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.010537
+version 1.000000
 
 =head1 SYNOPSIS
 
