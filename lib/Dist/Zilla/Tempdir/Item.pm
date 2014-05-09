@@ -80,23 +80,19 @@ has 'file' => (
   isa      => 'Dist::Zilla::Role::File',
   required => 1,
   is       => 'rw',
+  handles  => { name => 'name' },
 );
 
 =head2 name
 
-  isa      => Str,
-  required => 1,
-  is       => rw,
+Proxy for C<< $item->file->name >>
 
 This is the path to the file relative to the dist root.
 
+
+
 =cut
 
-has 'name' => (
-  isa      => 'Str',
-  required => 1,
-  is       => 'rw',
-);
 
 sub _mk_status {
   my $name  = shift;
