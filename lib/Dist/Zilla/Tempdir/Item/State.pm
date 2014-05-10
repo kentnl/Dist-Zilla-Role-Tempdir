@@ -77,6 +77,9 @@ sub _build__digester {
 
 sub _digest_for {
   my ( $self, $content ) = @_;
+  if ( not defined $content ) {
+    return croak("->_digest_for( content ) must have a defined value of content");
+  }
   $self->_digester->reset();
   $self->_digester->add($content);
   return $self->_digester->b64digest;
