@@ -8,6 +8,8 @@ package Dist::Zilla::Tempdir::Item::State;
 # AUTHORITY
 
 use Moose;
+use Carp qw( croak );
+use Path::Tiny qw( path );
 
 =attr C<hash>
 

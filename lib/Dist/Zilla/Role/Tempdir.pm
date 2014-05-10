@@ -10,6 +10,10 @@ package Dist::Zilla::Role::Tempdir;
 use Moose::Role;
 use Path::Tiny qw(path);
 use File::chdir;
+use Dist::Zilla::Tempdir::Item;
+use Dist::Zilla::File::InMemory;
+use Dist::Zilla::Tempdir::Item::State;
+use Path::Iterator::Rule;
 use namespace::autoclean;
 
 =head1 SYNOPSIS
@@ -88,7 +92,6 @@ sub capture_tempdir {
   $dzil = $self->zilla;
 
   for my $file ( @{ $dzil->files } ) {
-    require Dist::Zilla::Tempdir::Item::State;
     my $state = Dist::Zilla::Tempdir::Item::State->new(
       file           => $file,
       storage_prefix => $tempdir->absolute,
@@ -103,9 +106,6 @@ sub capture_tempdir {
   }
 
   my %output_files;
-
-  require Dist::Zilla::Tempdir::Item;
-  require Dist::Zilla::File::InMemory;
 
   for my $file ( values %input_files ) {
     my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
@@ -124,7 +124,6 @@ sub capture_tempdir {
     }
     $output_files{ $file->name } = $update_item;
   }
-  require Path::Iterator::Rule;
   for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->absolute->stringify ) ) {
     my $fullpath  = path($filename);
     my $shortname = $fullpath->relative( $tempdir->absolute->stringify );
