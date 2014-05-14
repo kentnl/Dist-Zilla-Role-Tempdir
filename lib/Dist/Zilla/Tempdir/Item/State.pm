@@ -93,8 +93,7 @@ sub _build_hash {
 sub _build_new_content {
   my ($self) = @_;
   return unless $self->on_disk;
-  $self->_relpath->slurp_raw();
-  return;
+  return $self->_relpath->slurp_raw();
 }
 
 sub _build_new_hash {
