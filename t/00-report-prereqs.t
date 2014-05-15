@@ -111,6 +111,7 @@ my $static_prereqs = do { my $x = {
                                       'Carp' => '0',
                                       'Digest::SHA' => '5.47',
                                       'Dist::Zilla' => '2.0',
+                                      'Dist::Zilla::File::InMemory' => '0',
                                       'File::Tempdir' => '0.02',
                                       'File::chdir' => '0.1002',
                                       'Moose' => '0.92',
