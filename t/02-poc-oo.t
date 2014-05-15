@@ -61,13 +61,13 @@ my (@files) = $plug->capture_tempdir(
   }
 );
 
-my ( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+my ( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 ok( $distpm->is_original, 'Dist.pm reports unmodified' );
 
-my ( $e2pm, ) = grep { $_->{name} eq 'example2.pm' } @files;
+my ( $e2pm, ) = grep { $_->name eq 'example2.pm' } @files;
 ok( $e2pm->is_new, 'New file example2.pm appeared' );
 
-my ( $epm, ) = grep { $_->{name} eq 'example.pm' } @files;
+my ( $epm, ) = grep { $_->name eq 'example.pm' } @files;
 ok( $epm->is_new, 'New file example.pm appeared' );
 
 @files = $plug->capture_tempdir(
@@ -80,7 +80,7 @@ ok( $epm->is_new, 'New file example.pm appeared' );
   }
 );
 
-( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 
 ok( $distpm->is_deleted, 'dist.pm reports deleted' );
 
@@ -92,7 +92,7 @@ ok( $distpm->is_deleted, 'dist.pm reports deleted' );
 
 #use Data::Dump qw( dump );
 #dump \@files;
-( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 
 ok( $distpm->is_modified, 'dist.pm reports modified' );
 

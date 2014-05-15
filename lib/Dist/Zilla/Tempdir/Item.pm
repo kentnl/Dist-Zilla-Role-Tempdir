@@ -5,6 +5,8 @@ package Dist::Zilla::Tempdir::Item;
 $Dist::Zilla::Tempdir::Item::VERSION = '1.000000';
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
 use Moose;
 
 use namespace::autoclean;
@@ -87,9 +89,9 @@ has 'file' => (
 
 
 
-has 'storage_prefix' => ( is => ro =>, required => 1 );
 
-has '_digester' => ( is => ro =>, lazy_build => 1 );
+
+
 
 sub _mk_status {
   my $name  = shift;
@@ -212,12 +214,6 @@ algorithm to test for modification.
 
 =head1 ATTRIBUTES
 
-=head2 C<storage_prefix>
-
-The root directory to write this file out to, and to read it from.
-
-=head1 ATTRIBUTES
-
 =head2 status
 
   isa => Str,
@@ -240,6 +236,12 @@ be 2 characters to represent different parts of state, I probably will not do th
 This is the Dist::Zilla::File::* item which we refer to. For items that C<is_deleted>, C<file> is likely to be the file before it got deleted.
 
 For C<is_new> and C<is_original> files, the item is the file itself, and for C<is_modified>, its the modified version of the file.
+
+=head2 name
+
+Proxy for C<< $item->file->name >>
+
+This is the path to the file relative to the dist root.
 
 =head1 METHODS
 

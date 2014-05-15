@@ -5,7 +5,11 @@ package Dist::Zilla::Tempdir::Item::State;
 $Dist::Zilla::Tempdir::Item::State::VERSION = '1.000000';
 # ABSTRACT: Intermediate state for a file
 
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
 use Moose;
+use Carp qw( croak );
+use Path::Tiny qw( path );
 
 
 
@@ -73,6 +77,9 @@ sub _build__digester {
 
 sub _digest_for {
   my ( $self, $content ) = @_;
+  if ( not defined $content ) {
+    return croak("->_digest_for( content ) must have a defined value of content");
+  }
   $self->_digester->reset();
   $self->_digester->add($content);
   return $self->_digester->b64digest;
@@ -86,8 +93,7 @@ sub _build_hash {
 sub _build_new_content {
   my ($self) = @_;
   return unless $self->on_disk;
-  $self->_relpath->slurp_raw();
-  return;
+  return $self->_relpath->slurp_raw();
 }
 
 sub _build_new_hash {
@@ -98,14 +104,23 @@ sub _build_new_hash {
 
 sub _encoded_content {
   my ($self) = @_;
-  return $self->file->encoded_content if $self->file->can('encoded_content');
-  return $self->content;
+  my $content;
+  my $method = 'content';
+  if ( $self->file->can('encoded_content') ) {
+    $method  = "encoded_content";
+    $content = $self->file->encoded_content;
+  }
+  else {
+    $content = $self->file->content;
+  }
+  if ( not defined $content ) {
+    croak( $self->file . " returned undef for $method" );
+  }
 }
 
 sub _relpath {
-  my ($self) = @_;
-  require Path::Tiny;
-  my $d        = Path::Tiny->new( $self->storage_prefix );
+  my ($self)   = @_;
+  my $d        = path( $self->storage_prefix );
   my $out_path = $d->child( $self->file->name );
   return $out_path;
 }
