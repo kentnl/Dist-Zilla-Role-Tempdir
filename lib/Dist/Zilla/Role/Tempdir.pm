@@ -9,11 +9,7 @@ package Dist::Zilla::Role::Tempdir;
 
 use Moose::Role;
 use Path::Tiny qw(path);
-use File::chdir;
-use Dist::Zilla::Tempdir::Item;
-use Dist::Zilla::File::InMemory;
-use Dist::Zilla::Tempdir::Item::State;
-use Path::Iterator::Rule;
+use Dist::Zilla::Tempdir::Dir;
 use namespace::autoclean;
 
 =head1 SYNOPSIS
@@ -83,65 +79,20 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my ( $dzil, $tempdir );
+  my $tdir = Dist::Zilla::Tempdir::Dir->new();
 
-  $tempdir = Path::Tiny->tempdir;
-
-  my %input_files;
-
-  $dzil = $self->zilla;
+  my $dzil = $self->zilla;
 
   for my $file ( @{ $dzil->files } ) {
-    my $state = Dist::Zilla::Tempdir::Item::State->new(
-      file           => $file,
-      storage_prefix => $tempdir->absolute,
-    );
-    $state->write_out;
-    $input_files{ $state->name } = $state;
-  }
-  {
-    ## no critic ( ProhibitLocalVars )
-    local $CWD = $tempdir->absolute->stringify;
-    $code->();
+    $tdir->add_file($file);
   }
 
-  my %output_files;
+  $tdir->run_in($code);
 
-  for my $file ( values %input_files ) {
-    my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
-    $update_item->set_original;
+  $tdir->update_input_files;
+  $tdir->update_disk_files;
 
-    if ( not $file->on_disk ) {
-      $update_item->set_deleted;
-    }
-    elsif ( $file->on_disk_changed ) {
-      $update_item->set_modified;
-      my %params = ( name => $file->name, content => $file->new_content );
-      if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
-        $params{encoded_content} = delete $params{content};
-      }
-      $update_item->file( Dist::Zilla::File::InMemory->new(%params) );
-    }
-    $output_files{ $file->name } = $update_item;
-  }
-  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->absolute->stringify ) ) {
-    my $fullpath  = path($filename);
-    my $shortname = $fullpath->relative( $tempdir->absolute->stringify );
-    next if exists $output_files{$shortname};
-
-    # FILE (N)ew
-    my %params = ( name => "$shortname", content => $fullpath->slurp_raw );
-    if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
-      $params{encoded_content} = delete $params{content};
-    }
-    $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
-      name => "$shortname",
-      file => Dist::Zilla::File::InMemory->new(%params)
-    );
-    $output_files{$shortname}->set_new;
-  }
-
-  return values %output_files;
+  return $tdir->all_output_files;
 }
 
 =head1 SEE ALSO
