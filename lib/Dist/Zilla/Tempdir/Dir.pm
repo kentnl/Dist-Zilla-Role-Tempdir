@@ -13,7 +13,7 @@ use Moose;
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
 use Dist::Zilla::Tempdir::Item;
-
+use Path::Iterator::Rule;
 use Path::Tiny qw(path);
 
 has '_tempdir' => (
