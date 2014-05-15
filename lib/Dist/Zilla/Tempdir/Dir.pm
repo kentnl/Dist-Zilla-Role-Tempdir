@@ -11,6 +11,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose;
 use File::chdir;
+use Dist::Zilla::Tempdir::Item::State;
 
 use Path::Tiny qw(path);
 
