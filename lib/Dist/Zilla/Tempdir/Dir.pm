@@ -33,9 +33,9 @@ has '_input_files' => (
   lazy    => 1,
   default => sub { {} },
   handles => {
-    '_set_input_file' => 'set',
+    '_set_input_file'  => 'set',
     '_all_input_files' => 'values',
-    '_has_input_file' => 'exists',
+    '_has_input_file'  => 'exists',
   },
 );
 
@@ -90,13 +90,12 @@ sub update_disk_file {
   if ( Dist::Zilla::File::InMemory->can('encoded_content') ) {
     $params{encoded_content} = delete $params{content};
   }
-  $self->_set_output_file(
-    "$shortname",
-    Dist::Zilla::Tempdir::Item->new(
-      name => "$shortname",
-      file => Dist::Zilla::File::InMemory->new(%params)
-    ),
+  my $item = Dist::Zilla::Tempdir::Item->new(
+    name => "$shortname",
+    file => Dist::Zilla::File::InMemory->new(%params)
   );
+  $item->set_new;
+  $self->_set_output_file( "$shortname", $item );
 }
 
 sub update_input_files {
