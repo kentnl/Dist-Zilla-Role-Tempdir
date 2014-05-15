@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use 5.006;
+use 5.008;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -24,7 +24,6 @@ my %WriteMakefileArgs = (
     "Carp" => 0,
     "Digest::SHA" => "5.47",
     "Dist::Zilla" => "2.0",
-    "Dist::Zilla::Tempdir::Dir" => 0,
     "File::Tempdir" => "0.02",
     "File::chdir" => "0.1002",
     "Moose" => "0.92",
@@ -33,6 +32,7 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0,
     "namespace::autoclean" => "0.09",
     "strict" => 0,
+    "utf8" => 0,
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
@@ -59,7 +59,6 @@ my %FallbackPrereqs = (
   "Dist::Zilla" => "2.0",
   "Dist::Zilla::Role::FileInjector" => 0,
   "Dist::Zilla::Role::InstallTool" => 0,
-  "Dist::Zilla::Tempdir::Dir" => 0,
   "Dist::Zilla::Tester" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec::Functions" => 0,
@@ -73,6 +72,7 @@ my %FallbackPrereqs = (
   "Test::More" => "0.89",
   "namespace::autoclean" => "0.09",
   "strict" => 0,
+  "utf8" => 0,
   "version" => 0,
   "warnings" => 0
 );

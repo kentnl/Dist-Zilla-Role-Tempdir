@@ -82,7 +82,6 @@
             "Carp" : "0",
             "Digest::SHA" : "5.47",
             "Dist::Zilla" : "2.0",
-            "Dist::Zilla::Tempdir::Dir" : "0",
             "File::Tempdir" : "0.02",
             "File::chdir" : "0.1002",
             "Moose" : "0.92",
@@ -90,8 +89,9 @@
             "Path::Tiny" : "0",
             "Scalar::Util" : "0",
             "namespace::autoclean" : "0.09",
-            "perl" : "5.006",
+            "perl" : "5.008",
             "strict" : "0",
+            "utf8" : "0",
             "warnings" : "0"
          }
       },
@@ -120,6 +120,10 @@
          "file" : "lib/Dist/Zilla/Role/Tempdir.pm",
          "version" : "1.000000"
       },
+      "Dist::Zilla::Tempdir::Dir" : {
+         "file" : "lib/Dist/Zilla/Tempdir/Dir.pm",
+         "version" : "1.000000"
+      },
       "Dist::Zilla::Tempdir::Item" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item.pm",
          "version" : "1.000000"
@@ -143,9 +147,6 @@
    },
    "version" : "1.000000",
    "x_BuiltWith" : {
-      "failures" : {
-         "Dist::Zilla::Tempdir::Dir" : "module was not found in INC"
-      },
       "modules" : {
          "CPAN::Meta" : "2.141170",
          "CPAN::Meta::Requirements" : "2.125",
@@ -216,6 +217,7 @@
          "Test::Pod::Coverage" : "1.08",
          "namespace::autoclean" : "0.15",
          "strict" : "1.08",
+         "utf8" : "1.13",
          "version" : "0.9908",
          "warnings" : "1.23"
       },
@@ -392,6 +394,7 @@
                "Dist::Zilla::Plugin::Test::Compile::PerFile" : {
                   "file" : [
                      "lib/Dist/Zilla/Role/Tempdir.pm",
+                     "lib/Dist/Zilla/Tempdir/Dir.pm",
                      "lib/Dist/Zilla/Tempdir/Item.pm",
                      "lib/Dist/Zilla/Tempdir/Item/State.pm"
                   ],

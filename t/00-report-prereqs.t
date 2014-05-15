@@ -111,7 +111,6 @@ my $static_prereqs = do { my $x = {
                                       'Carp' => '0',
                                       'Digest::SHA' => '5.47',
                                       'Dist::Zilla' => '2.0',
-                                      'Dist::Zilla::Tempdir::Dir' => '0',
                                       'File::Tempdir' => '0.02',
                                       'File::chdir' => '0.1002',
                                       'Moose' => '0.92',
@@ -119,8 +118,9 @@ my $static_prereqs = do { my $x = {
                                       'Path::Tiny' => '0',
                                       'Scalar::Util' => '0',
                                       'namespace::autoclean' => '0.09',
-                                      'perl' => '5.006',
+                                      'perl' => '5.008',
                                       'strict' => '0',
+                                      'utf8' => '0',
                                       'warnings' => '0'
                                     }
                     },

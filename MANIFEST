@@ -10,10 +10,12 @@ Makefile.PL
 README
 dist.ini
 lib/Dist/Zilla/Role/Tempdir.pm
+lib/Dist/Zilla/Tempdir/Dir.pm
 lib/Dist/Zilla/Tempdir/Item.pm
 lib/Dist/Zilla/Tempdir/Item/State.pm
 perlcritic.rc
 t/00-compile/lib_Dist_Zilla_Role_Tempdir_pm.t
+t/00-compile/lib_Dist_Zilla_Tempdir_Dir_pm.t
 t/00-compile/lib_Dist_Zilla_Tempdir_Item_State_pm.t
 t/00-compile/lib_Dist_Zilla_Tempdir_Item_pm.t
 t/00-report-prereqs.t
