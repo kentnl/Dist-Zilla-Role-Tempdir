@@ -30,9 +30,9 @@ has '_input_files' => (
   lazy    => 1,
   default => sub { {} },
   handles => {
-    set    => '_set_input_file',
-    values => '_all_input_files',
-    exists => '_has_input_file',
+    '_set_input_file' => 'set',
+    '_all_input_files' => 'values',
+    '_has_input_file' => 'exists',
   },
 );
 
@@ -43,8 +43,8 @@ has '_output_files' => (
   lazy    => 1,
   default => sub { {} },
   handles => {
-    set    => '_set_output_file',
-    values => 'all_output_files',
+    '_set_output_file' => 'set',
+    'all_output_files' => 'values',
   },
 );
 
