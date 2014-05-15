@@ -8,7 +8,7 @@ $Dist::Zilla::Tempdir::Item::VERSION = '1.000000';
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose;
-
+use MooseX::LazyRequire;
 use namespace::autoclean;
 
 use Carp qw(croak);
@@ -58,9 +58,7 @@ use Scalar::Util qw( blessed );
 
 has 'status' => (
   isa => 'Str',
-
-  #  required   => 1,
-  # TODO: use MooseX::LazyRequire -- kentnl 2010-05-31
+  lazy_required   => 1,
   is => 'rw',
 );
 

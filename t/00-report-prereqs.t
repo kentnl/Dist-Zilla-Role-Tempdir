@@ -116,6 +116,7 @@ my $static_prereqs = do { my $x = {
                                       'File::chdir' => '0.1002',
                                       'Moose' => '0.92',
                                       'Moose::Role' => '0',
+                                      'MooseX::LazyRequire' => '0',
                                       'Path::Iterator::Rule' => '0',
                                       'Path::Tiny' => '0',
                                       'Scalar::Util' => '0',
