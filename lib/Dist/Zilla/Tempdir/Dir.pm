@@ -43,7 +43,7 @@ has '_output_files' => (
   lazy    => 1,
   default => sub { {} },
   handles => {
-    set => '_set_output_file',
+    set    => '_set_output_file',
     values => 'all_output_files',
   },
 );
@@ -60,10 +60,7 @@ sub add_file {
 
 sub update_input_file {
   my ( $self, $file ) = @_;
-  my $update_item = Dist::Zilla::Tempdir::Item->new(
-    name => $file->name,
-    file => $file->file,
-  );
+
   my $update_item = Dist::Zilla::Tempdir::Item->new( name => $file->name, file => $file->file, );
   $update_item->set_original;
 
@@ -116,7 +113,7 @@ sub update_disk_files {
 
 sub run_in {
   my ( $self, $code ) = @_;
-   ## no critic ( ProhibitLocalVars )
+  ## no critic ( ProhibitLocalVars )
   local $CWD = $self->_tempdir->stringify;
   return $code->();
 }
