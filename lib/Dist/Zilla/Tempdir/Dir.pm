@@ -105,7 +105,7 @@ sub update_input_files {
 
 sub update_disk_files {
   my ($self) = @_;
-  for my $filename ( Path::Iterator::Rule->new->file->all( $tempdir->absolute->stringify ) ) {
+  for my $filename ( Path::Iterator::Rule->new->file->all( $self->_tempdir->stringify ) ) {
     next if $self->_has_input_file( path($filename)->relative( $self->_tempdir ) );
     $self->update_disk_file($filename);
   }
