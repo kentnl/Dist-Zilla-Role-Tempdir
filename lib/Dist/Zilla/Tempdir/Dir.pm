@@ -94,7 +94,7 @@ sub update_disk_file {
   }
   my $item = Dist::Zilla::Tempdir::Item->new(
     name => "$shortname",
-    file => Dist::Zilla::File::InMemory->new(%params)
+    file => Dist::Zilla::File::InMemory->new(%params),
   );
   $item->set_new;
   $self->_set_output_file( "$shortname", $item );
