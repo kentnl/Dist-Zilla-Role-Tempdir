@@ -9,7 +9,7 @@ package Dist::Zilla::Tempdir::Dir;
 
 # AUTHORITY
 
-use Moose;
+use Moose qw( has );
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
 use Dist::Zilla::Tempdir::Item;

@@ -9,7 +9,7 @@ package Dist::Zilla::Tempdir::Item;
 
 # AUTHORITY
 
-use Moose;
+use Moose qw( has );
 use MooseX::LazyRequire;
 use namespace::autoclean;
 

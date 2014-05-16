@@ -9,7 +9,7 @@ package Dist::Zilla::Tempdir::Item::State;
 
 # AUTHORITY
 
-use Moose;
+use Moose qw( has );
 use Carp qw( croak );
 use Path::Tiny qw( path );
 
