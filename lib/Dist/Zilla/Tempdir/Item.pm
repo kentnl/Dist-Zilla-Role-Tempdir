@@ -8,7 +8,7 @@ package Dist::Zilla::Tempdir::Item;
 # AUTHORITY
 
 use Moose;
-
+use MooseX::LazyRequire;
 use namespace::autoclean;
 
 use Carp qw(croak);
@@ -57,11 +57,9 @@ be 2 characters to represent different parts of state, I probably will not do th
 =cut
 
 has 'status' => (
-  isa => 'Str',
-
-  #  required   => 1,
-  # TODO: use MooseX::LazyRequire -- kentnl 2010-05-31
-  is => 'rw',
+  isa           => 'Str',
+  lazy_required => 1,
+  is            => 'rw',
 );
 
 =head2 file
