@@ -174,6 +174,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Tempdir::Item::State - Intermediate state for a file

@@ -181,6 +181,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir;

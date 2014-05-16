@@ -27,6 +27,9 @@
  - Version semantics are now X.YYYZZZ
  - This is the primary motivation for the 1.x on the box.
 
+ [Bugfixes]
+ - No longer does any ->isa checking for digest modules. This closes #1
+ 
  [Dependencies::Stats]
  - Dependencies changed since 0.01053722, see Changes.deps{,.all,.dev} for
    details

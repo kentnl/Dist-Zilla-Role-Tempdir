@@ -134,6 +134,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Tempdir::Dir - A temporary directory with a collection of item states

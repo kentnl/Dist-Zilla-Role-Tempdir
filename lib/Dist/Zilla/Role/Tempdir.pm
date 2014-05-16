@@ -114,6 +114,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
