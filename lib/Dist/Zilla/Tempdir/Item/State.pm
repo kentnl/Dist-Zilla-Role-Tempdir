@@ -104,8 +104,18 @@ sub _build_new_hash {
 
 sub _encoded_content {
   my ($self) = @_;
-  return $self->file->encoded_content if $self->file->can('encoded_content');
-  return $self->content;
+  my $content;
+  my $method = 'content';
+  if ( $self->file->can('encoded_content') ) {
+    $method  = "encoded_content";
+    $content = $self->file->encoded_content;
+  }
+  else {
+    $content = $self->file->content;
+  }
+  if ( not defined $content ) {
+    croak( $self->file . " returned undef for $method" );
+  }
 }
 
 sub _relpath {
