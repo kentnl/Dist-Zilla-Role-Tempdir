@@ -266,7 +266,7 @@ and information ready for C<< ->files >>
 
 =head2 C<run_in>
 
-  my $rval = $dir->run_in(sub { 
+  my $rval = $dir->run_in(sub {
     return 1;
   });
 
