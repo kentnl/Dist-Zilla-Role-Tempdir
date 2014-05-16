@@ -27,7 +27,7 @@ sub _build__tempdir {
 }
 
 has '_input_files' => (
-  isa     => "HashRef",
+  isa     => 'HashRef',
   traits  => [qw( Hash )],
   is      => ro =>,
   lazy    => 1,
@@ -40,7 +40,7 @@ has '_input_files' => (
 );
 
 has '_output_files' => (
-  isa     => "HashRef",
+  isa     => 'HashRef',
   traits  => [qw( Hash )],
   is      => ro =>,
   lazy    => 1,
