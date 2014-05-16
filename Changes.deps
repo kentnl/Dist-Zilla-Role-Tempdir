@@ -39,6 +39,7 @@
  [Removed / runtime requires]
  - File::Find::Rule 0.30
  - File::Slurp 9999.13
+ - File::Tempdir 0.02
  - Path::Class 0.17
 
  [Removed / test requires]
