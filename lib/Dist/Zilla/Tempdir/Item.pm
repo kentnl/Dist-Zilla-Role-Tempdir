@@ -91,7 +91,6 @@ This is the path to the file relative to the dist root.
 
 =cut
 
-
 sub _mk_status {
   my $name  = shift;
   my $value = shift;
