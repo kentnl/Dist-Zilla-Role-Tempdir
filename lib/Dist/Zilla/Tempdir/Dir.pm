@@ -223,7 +223,7 @@ version 1.000000
   $dir->update_input_files;
   $dir->update_disk_files;
 
-  my @states = $dir->all_output_files();
+  my @file_states = $dir->files();
 
 =head1 METHODS
 
