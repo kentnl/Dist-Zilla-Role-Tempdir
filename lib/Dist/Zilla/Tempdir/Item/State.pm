@@ -80,7 +80,7 @@ sub _build__digester {
 sub _digest_for {
   my ( $self, $content ) = @_;
   if ( not defined $content ) {
-    return croak("->_digest_for( content ) must have a defined value of content");
+    return croak('->_digest_for( content ) must have a defined value of content');
   }
   $self->_digester->reset();
   $self->_digester->add($content);
@@ -109,7 +109,7 @@ sub _encoded_content {
   my $content;
   my $method = 'content';
   if ( $self->file->can('encoded_content') ) {
-    $method  = "encoded_content";
+    $method  = 'encoded_content';
     $content = $self->file->encoded_content;
   }
   else {
