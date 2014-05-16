@@ -1,35 +1,44 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-1.000000 2014-05-16T16:59:16Z
+1.000000 2014-05-16T17:15:38Z
  [00 Major]
  - DZil Encoding support added.
  - Internals overhauled to use newer things.
  - Tooling overhauls
  - Version Scheme overhauls
 
- [01 Dzil Encoding Support]
+ [01 Minor backwards incompatible API change]
+ - Accessing $item->{name} is now gone entirely, use $item->name instead.
+ - $item->{state} may also vanish in the near future, stop using it.
+
+ [02 Dzil Encoding Support]
  - Should now be compatible with DZil 5, and reading files from a tempdir
    will now default to reading their content as "encoded_content" to an
    InMemory object.
 
- [02 Path/IO Replaced]
+ [03 Path/IO Replaced]
  - Usage of Path::Class and File::Slurp have both been eliminated and
    replaced by Path::Tiny
  - File::Find::Rule is replaced with Path::Iterator::Rule
 
- [03 Toolkit moved to EUMM]
+ [04 Toolkit moved to EUMM]
  - Toolkit is now EUMM instead of Module::Build
  - Toolkit upgrade dependencies now prefer "latest" via "recommends",
    instead of "requires"
 
- [04 Version Scheme change]
+ [05 Version Scheme change]
  - Mantissa length has shortened to 6
  - Version semantics are now X.YYYZZZ
  - This is the primary motivation for the 1.x on the box.
 
  [Bugfixes]
  - No longer does any ->isa checking for digest modules. This closes #1
- 
+
+ [Dependencies::Aggregate]
+ - 5.010001 : 186
+ - 5.018002 : 169
+ - 5.019009 : 164
+
  [Dependencies::Stats]
  - Dependencies changed since 0.01053722, see Changes.deps{,.all,.dev} for
    details
