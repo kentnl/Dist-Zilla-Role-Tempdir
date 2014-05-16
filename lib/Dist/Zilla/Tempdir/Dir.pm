@@ -47,7 +47,7 @@ has '_output_files' => (
   default => sub { {} },
   handles => {
     '_set_output_file' => 'set',
-    'all_output_files' => 'values',
+    'files'            => 'values',
   },
 );
 

@@ -94,7 +94,7 @@ sub capture_tempdir {
   $tdir->update_input_files;
   $tdir->update_disk_files;
 
-  return $tdir->all_output_files;
+  return $tdir->files;
 }
 
 =head1 SEE ALSO
