@@ -162,7 +162,7 @@ those changes back into L<< C<Dist::Zilla>|Dist::Zilla >>. That is left as an ex
 
 =head2 capture_tempdir
 
-Creates a File::Tempdir and dumps the current state of Dist::Zilla's files into it.
+Creates a temporary and dumps the current state of Dist::Zilla's files into it.
 
 Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the changed files.
 
