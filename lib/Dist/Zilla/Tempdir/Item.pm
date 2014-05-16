@@ -54,7 +54,7 @@ of this dist, you may even have to, but try not to, if it breaks, something some
 Using the is_* and set_* accessors is a I<much> smarter idea.
 
 At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforeseeable expanding it to
-be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;] )
+be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;) )
 
 =cut
 
