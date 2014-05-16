@@ -44,7 +44,7 @@ those changes back into [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla). T
 
 ## capture\_tempdir
 
-Creates a File::Tempdir and dumps the current state of Dist::Zilla's files into it.
+Creates a temporary and dumps the current state of Dist::Zilla's files into it.
 
 Runs the specified code sub `chdir`'ed into that `tmpdir`, and captures the changed files.
 

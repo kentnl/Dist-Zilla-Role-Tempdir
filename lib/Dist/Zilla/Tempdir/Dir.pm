@@ -9,6 +9,18 @@ package Dist::Zilla::Tempdir::Dir;
 
 # AUTHORITY
 
+=head1 SYNOPSIS
+
+  my $dir = Dist::Zilla::Tempdir::Dir->new();
+  $dir->add_file( $zilla_file );
+  $dir->run_in(sub {  });
+  $dir->update_input_files;
+  $dir->update_disk_files;
+
+  my @file_states = $dir->files();
+
+=cut
+
 use Moose qw( has );
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
@@ -39,6 +51,12 @@ has '_input_files' => (
   },
 );
 
+=method C<files>
+
+Returns a list of L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
+
+=cut
+
 has '_output_files' => (
   isa     => 'HashRef',
   traits  => [qw( Hash )],
@@ -51,6 +69,15 @@ has '_output_files' => (
   },
 );
 
+=method C<add_file>
+
+  $dir->add_file( $dzil_file );
+
+Adds C<$dzil_file> to the named temporary directory, written out to disk, and records
+it internally as an "original" file.
+
+=cut
+
 sub add_file {
   my ( $self, $file ) = @_;
   my $state = Dist::Zilla::Tempdir::Item::State->new(
@@ -61,6 +88,15 @@ sub add_file {
   $self->_set_input_file( $file->name, $state );
   return;
 }
+
+=method C<update_input_file>
+
+  $dir->update_input_file( $dzil_file );
+
+Refreshes the C<$dzil_file> from its written out context, determining if that file has been changed since
+addition or not, recording the relevant data for C<< ->files >>
+
+=cut
 
 sub update_input_file {
   my ( $self, $file ) = @_;
@@ -83,6 +119,14 @@ sub update_input_file {
   return;
 }
 
+=method C<update_disk_file>
+
+  $dir->update_disk_file( $disk_path );
+
+Assume C<$disk_path> is a path of a B<NEW> file and record it in C<< ->files >>
+
+=cut
+
 sub update_disk_file {
   my ( $self, $fullname ) = @_;
   my $fullpath  = path($fullname);
@@ -101,6 +145,14 @@ sub update_disk_file {
   return;
 }
 
+=method C<update_input_files>
+
+  $dir->update_input_files
+
+Refresh the state of all written out files and record them ready for C<< ->files >>
+
+=cut
+
 sub update_input_files {
   my ($self) = @_;
   for my $file ( $self->_all_input_files ) {
@@ -108,6 +160,15 @@ sub update_input_files {
   }
   return;
 }
+
+=method C<update_disk_files>
+
+  $dir->update_disk_files
+
+Scan the temporary directory for files that weren't added as an C<input> file, and record their status
+and information ready for C<< ->files >>
+
+=cut
 
 sub update_disk_files {
   my ($self) = @_;
@@ -117,6 +178,16 @@ sub update_disk_files {
   }
   return;
 }
+
+=method C<run_in>
+
+  my $rval = $dir->run_in(sub {
+    return 1;
+  });
+
+Enter the temporary directory and run the passed code block, which is assumed to be creating/modifying/deleting files.
+
+=cut
 
 sub run_in {
   my ( $self, $code ) = @_;
