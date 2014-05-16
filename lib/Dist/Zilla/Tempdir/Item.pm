@@ -57,9 +57,9 @@ use Scalar::Util qw( blessed );
 
 
 has 'status' => (
-  isa => 'Str',
-  lazy_required   => 1,
-  is => 'rw',
+  isa           => 'Str',
+  lazy_required => 1,
+  is            => 'rw',
 );
 
 

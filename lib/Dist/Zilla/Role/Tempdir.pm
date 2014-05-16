@@ -80,15 +80,15 @@ sub capture_tempdir {
     unless defined $code;
 
   my $tdir = Dist::Zilla::Tempdir::Dir->new();
-  
+
   my $dzil = $self->zilla;
 
   for my $file ( @{ $dzil->files } ) {
-    $tdir->add_file( $file );
+    $tdir->add_file($file);
   }
 
   $tdir->run_in($code);
- 
+
   $tdir->update_input_files;
   $tdir->update_disk_files;
 
