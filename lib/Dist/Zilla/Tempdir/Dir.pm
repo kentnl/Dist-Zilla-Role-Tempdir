@@ -59,6 +59,7 @@ sub add_file {
   );
   $state->write_out;
   $self->_set_input_file( $file->name, $state );
+  return;
 }
 
 sub update_input_file {
@@ -79,6 +80,7 @@ sub update_input_file {
     $update_item->file( Dist::Zilla::File::InMemory->new(%params) );
   }
   $self->_set_output_file( $file->name, $update_item );
+  return;
 }
 
 sub update_disk_file {
@@ -96,6 +98,7 @@ sub update_disk_file {
   );
   $item->set_new;
   $self->_set_output_file( "$shortname", $item );
+  return;
 }
 
 sub update_input_files {
@@ -103,6 +106,7 @@ sub update_input_files {
   for my $file ( $self->_all_input_files ) {
     $self->update_input_file($file);
   }
+  return;
 }
 
 sub update_disk_files {
@@ -111,6 +115,7 @@ sub update_disk_files {
     next if $self->_has_input_file( path($filename)->relative( $self->_tempdir ) );
     $self->update_disk_file($filename);
   }
+  return;
 }
 
 sub run_in {
