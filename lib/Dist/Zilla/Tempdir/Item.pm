@@ -1,45 +1,97 @@
+use 5.008;    # 08 -> [utf8], 06 -> [pragmas, our]
+use utf8;
 use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item;
-BEGIN {
-  $Dist::Zilla::Tempdir::Item::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Tempdir::Item::VERSION = '0.01053722';
-}
-
+$Dist::Zilla::Tempdir::Item::VERSION = '1.000000';
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
-use Moose;
-use Carp qw( croak );
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+use Moose qw( has );
+use MooseX::LazyRequire;
+use namespace::autoclean;
+
+use Carp qw(croak);
 use Scalar::Util qw( blessed );
 
-use namespace::autoclean;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 has 'status' => (
-  isa => 'Str',
-
-  #  required   => 1,
-  # TODO: use MooseX::LazyRequire -- kentnl 2010-05-31
-  is => 'rw',
+  isa           => 'Str',
+  lazy_required => 1,
+  is            => 'rw',
 );
+
+
+
+
+
+
+
+
+
+
+
 
 
 has 'file' => (
   isa      => 'Dist::Zilla::Role::File',
   required => 1,
   is       => 'rw',
+  handles  => { name => 'name' },
 );
 
 
-has 'name' => (
-  isa      => 'Str',
-  required => 1,
-  is       => 'rw',
-);
+
+
+
+
+
+
+
+
 
 sub _mk_status {
   my $name  = shift;
@@ -47,19 +99,15 @@ sub _mk_status {
 
   my $setter = sub {
     my $self = shift;
-    croak $name . 'is an instance method, not a class method'
-      unless blessed($self);
-    croak 'too many arguments ( 0 expected ) to ->' . $name
-      if @_;
+    return croak( $name . 'is an instance method, not a class method' ) unless blessed($self);
+    return croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status($value);
   };
 
   my $getter = sub {
     my $self = shift;
-    croak $name . 'is an instance method, not a class method'
-      unless blessed($self);
-    croak 'too many arguments ( 0 expected ) to ->' . $name
-      if @_;
+    return croak( $name . 'is an instance method, not a class method' ) unless blessed($self);
+    return croak( 'too many arguments ( 0 expected ) to ->' . $name ) if @_;
     $self->status() eq $value;
   };
 
@@ -73,13 +121,52 @@ sub _mk_status {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 _mk_status( 'modified', 'M' );
+
+
+
+
+
+
+
+
+
 
 
 _mk_status( 'original', 'O' );
 
 
+
+
+
+
+
+
+
+
+
+
 _mk_status( 'new', 'N' );
+
+
+
+
+
+
+
+
+
 
 
 _mk_status( 'deleted', 'D' );
@@ -94,13 +181,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir;
 
 =head1 VERSION
 
-version 0.01053722
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -138,7 +227,7 @@ of this dist, you may even have to, but try not to, if it breaks, something some
 Using the is_* and set_* accessors is a I<much> smarter idea.
 
 At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforeseeable expanding it to
-be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;] )
+be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;) )
 
 =head2 file
 
@@ -152,9 +241,7 @@ For C<is_new> and C<is_original> files, the item is the file itself, and for C<i
 
 =head2 name
 
-  isa      => Str,
-  required => 1,
-  is       => rw,
+Proxy for C<< $item->file->name >>
 
 This is the path to the file relative to the dist root.
 
@@ -199,7 +286,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric.
+This software is copyright (c) 2014 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

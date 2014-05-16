@@ -1,27 +1,76 @@
+use 5.008;    # 08 -> [utf8], 06 -> [pragmas,our] 04 ->  [ my for ]
+use utf8;
 use strict;
 use warnings;
 
 package Dist::Zilla::Role::Tempdir;
-BEGIN {
-  $Dist::Zilla::Role::Tempdir::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Role::Tempdir::VERSION = '0.01053722';
-}
-
+$Dist::Zilla::Role::Tempdir::VERSION = '1.000000';
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
-use Moose::Role;
-use Digest::SHA;
-use File::Tempdir;
-use File::Slurp qw( write_file read_file );
-use Path::Class qw( dir file );
-use File::chdir;
-use File::Find::Rule;
-use Dist::Zilla::File::InMemory;
-use Dist::Zilla::Tempdir::Item;
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
+use Moose::Role;
+use Path::Tiny qw(path);
+use Dist::Zilla::Tempdir::Dir;
 use namespace::autoclean;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -32,106 +81,30 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my ($dzil);
+  my $tdir = Dist::Zilla::Tempdir::Dir->new();
 
-  $dzil = $self->zilla;
-
-  my ( $tempdir, $dir );
-  $tempdir = File::Tempdir->new();
-  $dir     = dir( $tempdir->name );
-
-  my %input_files;
+  my $dzil = $self->zilla;
 
   for my $file ( @{ $dzil->files } ) {
-    my ( $name, $content, ) = ( $file->name, $file->content, );
-
-    $input_files{ $file->name } = {
-      hash => $self->digest_for( \$content ),
-      file => $file,
-    };
-
-    my ($tmpfile) = $dir->file($name);
-    $tmpfile->dir->mkpath(1);
-    write_file( $tmpfile->absolute->stringify, \$content );
-  }
-  {
-    ## no critic ( ProhibitLocalVars )
-    local $CWD = $dir;
-    $code->();
-  }
-  my (@files) = File::Find::Rule->file->in($dir);
-
-  my %output_files;
-
-  for ( keys %input_files ) {
-    $output_files{$_} = Dist::Zilla::Tempdir::Item->new(
-      name => $_,
-      file => $input_files{$_}->{file},
-    );
-    $output_files{$_}->set_deleted;
+    $tdir->add_file($file);
   }
 
-  for my $filename (@files) {
+  $tdir->run_in($code);
 
-    my $shortname = file($filename)->relative($dir)->stringify;
-    my $content   = file($filename)->slurp;
-    my $hash      = $self->digest_for( \$content );
+  $tdir->update_input_files;
+  $tdir->update_disk_files;
 
-    if ( exists $input_files{$shortname} ) {
-
-      # FILE NOT MODIFIED, (O)riginal
-
-      if ( $input_files{$shortname}->{hash} eq $hash ) {
-        $output_files{$shortname}->set_original;
-        $output_files{$shortname}->file( $input_files{$shortname}->{file} );
-        next;
-      }
-
-      # FILE (M)odified
-      $output_files{$shortname}->set_modified;
-      $output_files{$shortname}->file(
-        Dist::Zilla::File::InMemory->new(
-          name    => $shortname,
-          content => $content,
-        )
-      );
-      next;
-    }
-
-    # FILE (N)ew
-    $output_files{$shortname} = Dist::Zilla::Tempdir::Item->new(
-      name => $shortname,
-      file => Dist::Zilla::File::InMemory->new(
-        name    => $shortname,
-        content => $content,
-      ),
-    );
-    $output_files{$shortname}->set_new;
-  }
-
-  return values %output_files;
+  return $tdir->files;
 }
 
 
-sub digest_for {
-  my ( $self, $data ) = @_;
-  $self->_digester->reset;
-  $self->_digester->add( ${$data} );
-  return $self->_digester->b64digest;
-}
 
 
-has _digester => (
-  isa        => 'Digest::base',
-  is         => 'rw',
-  lazy_build => 1,
-);
 
 
-sub _build__digester {
-  ## no critic ( ProhibitMagicNumbers )
-  return Digest::SHA->new(512);
-}
+
+
+
 
 
 no Moose::Role;
@@ -141,13 +114,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 0.01053722
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -187,7 +162,7 @@ those changes back into L<< C<Dist::Zilla>|Dist::Zilla >>. That is left as an ex
 
 =head2 capture_tempdir
 
-Creates a File::Tempdir and dumps the current state of Dist::Zilla's files into it.
+Creates a temporary and dumps the current state of Dist::Zilla's files into it.
 
 Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the changed files.
 
@@ -204,28 +179,6 @@ Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
 
 Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
 
-=head2 digest_for
-
-  my $hash = $self->digest_for( \$content );
-
-Hashes content and returns the result in b64.
-
-=head1 PRIVATE ATTRIBUTES
-
-=head2 _digester
-
-  isa => Digest::base,
-  is  => rw,
-  lazy_build => 1
-
-Used for Digesting the contents of files.
-
-=head1 PRIVATE METHODS
-
-=head2 _build__digester
-
-returns an instance of Digest::SHA with 512bit hashes.
-
 =head1 SEE ALSO
 
 =over 4
@@ -240,7 +193,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric.
+This software is copyright (c) 2014 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

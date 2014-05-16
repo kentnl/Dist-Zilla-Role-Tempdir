@@ -55,31 +55,32 @@ my $plug = Dist::Zilla::Plugin::TestTempDir->new(
 
 my (@files) = $plug->capture_tempdir(
   sub {
-    use File::Slurp qw( write_file );
-    write_file( 'example2.pm', "# ABSTRACT: A Sample Generated File" );
+    use Path::Tiny qw(path);
+    path('example2.pm')->spew_raw("# ABSTRACT: A Sample Generated File");
     system('echo ANOTHER GENERATED FILE > example.pm');
   }
 );
 
-my ( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+my ( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 is( $distpm->{status}, 'O', 'Dist.pm reports unmodified' );
 
-my ( $e2pm, ) = grep { $_->{name} eq 'example2.pm' } @files;
+my ( $e2pm, ) = grep { $_->name eq 'example2.pm' } @files;
 is( $e2pm->{status}, 'N', 'New file example2.pm appeared' );
 
-my ( $epm, ) = grep { $_->{name} eq 'example.pm' } @files;
+my ( $epm, ) = grep { $_->name eq 'example.pm' } @files;
 is( $epm->{status}, 'N', 'New file example.pm appeared' );
 
 @files = $plug->capture_tempdir(
   sub {
-#    system("cmd");
-    system($^X, '-we', 'unlink q{dist.pm}') and die;
-#    print "done!\n";
-#    system("cmd");
+    #    system("cmd");
+    system( $^X, '-we', 'unlink q{dist.pm}' ) and die;
+
+    #    print "done!\n";
+    #    system("cmd");
   }
 );
 
-( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 
 is( $distpm->{status}, 'D', 'dist.pm reports deleted' );
 
@@ -91,7 +92,7 @@ is( $distpm->{status}, 'D', 'dist.pm reports deleted' );
 
 #use Data::Dump qw( dump );
 #dump \@files;
-( $distpm, ) = grep { $_->{name} eq 'dist.pm' } @files;
+( $distpm, ) = grep { $_->name eq 'dist.pm' } @files;
 
 is( $distpm->{status}, 'M', 'dist.pm reports modified' );
 

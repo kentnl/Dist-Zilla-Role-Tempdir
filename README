@@ -3,7 +3,7 @@ NAME
     plug-in.
 
 VERSION
-    version 0.01053722
+    version 1.000000
 
 SYNOPSIS
       package #
@@ -43,8 +43,8 @@ SYNOPSIS
 
 METHODS
   capture_tempdir
-    Creates a File::Tempdir and dumps the current state of Dist::Zilla's
-    files into it.
+    Creates a temporary and dumps the current state of Dist::Zilla's files
+    into it.
 
     Runs the specified code sub "chdir"'ed into that "tmpdir", and captures
     the changed files.
@@ -62,23 +62,6 @@ METHODS
 
     Make sure to look at "Dist::Zilla::Tempdir::Item" for usage.
 
-  digest_for
-      my $hash = $self->digest_for( \$content );
-
-    Hashes content and returns the result in b64.
-
-PRIVATE ATTRIBUTES
-  _digester
-      isa => Digest::base,
-      is  => rw,
-      lazy_build => 1
-
-    Used for Digesting the contents of files.
-
-PRIVATE METHODS
-  _build__digester
-    returns an instance of Digest::SHA with 512bit hashes.
-
 SEE ALSO
     *   "Dist::Zilla::Tempdir::Item"
 
@@ -86,7 +69,7 @@ AUTHOR
     Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2013 by Kent Fredric.
+    This software is copyright (c) 2014 by Kent Fredric.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
