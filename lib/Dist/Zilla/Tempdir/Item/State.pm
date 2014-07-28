@@ -4,7 +4,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
-$Dist::Zilla::Tempdir::Item::State::VERSION = '1.000001';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: Intermediate state for a file
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
