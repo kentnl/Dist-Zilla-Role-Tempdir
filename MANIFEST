@@ -10,6 +10,7 @@ META.yml
 Makefile.PL
 README
 dist.ini
+dist.ini.meta
 lib/Dist/Zilla/Role/Tempdir.pm
 lib/Dist/Zilla/Tempdir/Dir.pm
 lib/Dist/Zilla/Tempdir/Item.pm

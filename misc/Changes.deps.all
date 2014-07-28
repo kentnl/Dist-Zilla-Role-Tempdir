@@ -1,6 +1,18 @@
 This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
 
 1.000001
+ [Added / test recommends]
+ - CPAN::Meta::Prereqs
+
+ [Added / test requires]
+ - File::Spec
+ - Scalar::Util
+
+ [Changed / develop requires]
+ - Dist::Zilla::PluginBundle::Author::KENTNL 2.013003 → 2.016005
+
+ [Changed / test requires]
+ - version 0 → 0.77
 
 1.000000 2014-05-16T19:09:54Z
  [Added / configure recommends]
