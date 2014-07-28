@@ -4,7 +4,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 # VERSION
 
-version 1.000000
+version 1.000001
 
 # SYNOPSIS
 
