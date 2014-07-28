@@ -5,6 +5,8 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
 
+our $VERSION = '1.000001';
+
 # ABSTRACT: Intermediate state for a file
 
 # AUTHORITY

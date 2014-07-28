@@ -5,6 +5,8 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
+our $VERSION = '1.000001';
+
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 # AUTHORITY
