@@ -1,13 +1,16 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.000002 2014-07-29T06:25:48Z
+
 1.000001 2014-07-29T06:22:12Z
  [Bugfix]
  - encoded content fetching content was broken, and so, emitted files were all empty! Great!
 
  [Dependencies::Stats]
  - Dependencies changed since 1.000000, see misc/*.deps* for details
+ - configure: ↓1
  - develop: +3 -3 (suggests: +2 -1)
- - test: +2 ↑1 (recommends: +1)
+ - test: +3 ↑1 (recommends: +1)
 
 1.000000 2014-05-16T19:09:54Z
  [00 Major]
