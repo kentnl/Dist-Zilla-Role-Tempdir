@@ -24,6 +24,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 use Moose qw( has );
+use Carp qw( croak );
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
 use Dist::Zilla::Tempdir::Item;
