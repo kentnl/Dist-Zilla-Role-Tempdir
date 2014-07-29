@@ -24,6 +24,7 @@ our $VERSION = '1.000002';
 =cut
 
 use Moose qw( has );
+use Carp qw( croak );
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
 use Dist::Zilla::Tempdir::Item;
@@ -232,6 +233,28 @@ sub keepalive {
   return $path;
 }
 
+=method C<keepalive_fail>
+
+A utility method to invoke a croak (heh) that preserves the scratch directory, and tells
+the croak recipient where to find it.
+
+  $dir->keepalive_fail();
+  $dir->keepalive_fail("Some Diagnostic Reason");
+
+=cut
+
+sub keepalive_fail {
+  my ( $self, $message ) = @_;
+
+  if ( not $message ) {
+    $message = q[];
+  }
+  else {
+    $message .= qq[\n];
+  }
+  $message .= q[Role::Tempdir's scratch directory preserved at ] . $self->keepalive(1);
+  croak $message;
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
