@@ -48,7 +48,7 @@ sub _build__tempdir {
   my $template = 'DZ_R_Tempdir_';
   if ( $self->_has_tempdir_owner ) {
     my $owner = $self->_tempdir_owner;
-    $owner =~ s/[^A-Za-z0-9]+/_/xmsg;
+    $owner =~ s/[^[:alpha:]0-9]+/_/xmsg;
     $template .= $owner . '_';
   }
   $template .= 'XXXXXX';
