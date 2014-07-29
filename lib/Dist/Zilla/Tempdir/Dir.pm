@@ -198,6 +198,33 @@ sub run_in {
   return $code->();
 }
 
+sub keepalive {
+  my ( $nargs, $self, $keep ) = ( scalar @_, @_ );
+
+  my $path = $self->_tempdir;
+
+  if ( $nargs < 2 ) {
+    return $path;
+  }
+
+  if ($keep) {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(0);
+  }
+  else {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(1);
+  }
+  return $path;
+}
+
+sub keepalive_fail {
+  my ( $self, $message ) = @_;
+
+  $message = qq[] unless $message;
+  $message .= qq[\n];
+  $message .= "Role::Tempdir's scratch directory preserved at " . $self->keepalive(1);
+  croak $message;
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
