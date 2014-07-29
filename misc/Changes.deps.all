@@ -1,6 +1,8 @@
 This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
 
-1.000001
+1.000002
+
+1.000001 2014-07-29T06:22:12Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::BumpVersionAfterRelease
  - Dist::Zilla::Plugin::CopyFilesFromBuild
@@ -14,8 +16,12 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - CPAN::Meta::Prereqs
 
  [Added / test requires]
+ - Dist::Zilla::File::FromCode
  - File::Spec
  - Scalar::Util
+
+ [Changed / configure requires]
+ - ExtUtils::MakeMaker 6.30 → 0
 
  [Changed / test requires]
  - version 0 → 0.77
