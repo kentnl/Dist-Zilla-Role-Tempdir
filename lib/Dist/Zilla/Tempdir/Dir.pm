@@ -344,7 +344,7 @@ This is mostly an insane glue layer for
 
   $dir->_tempdir->[Path::Tiny::TEMP]->unlink_on_destroy($x)
 
-Except the insanity of poking too many internal guts is well encapuslated.
+Except the insanity of poking too many internal guts is well encapsulated.
 
 =head1 AUTHOR
 
