@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000001 2014-07-29T06:22:12Z
  [Bugfix]
  - encoded content fetching content was broken, and so, emitted files were all empty! Great!
 
