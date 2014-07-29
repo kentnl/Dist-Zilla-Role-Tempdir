@@ -120,6 +120,7 @@ sub _encoded_content {
   if ( not defined $content ) {
     croak( $self->file . " returned undef for $method" );
   }
+  return $content;
 }
 
 sub _relpath {
