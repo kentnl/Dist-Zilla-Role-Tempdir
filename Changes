@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-1.001000 2014-07-29T09:14:40Z
+1.001000 2014-07-29T09:21:17Z
  [00 Major]
  - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.
  - ::Dir nas new 'keepalive_fail' method to trigger a croak, keep the temporary directory, and tell the user where to
