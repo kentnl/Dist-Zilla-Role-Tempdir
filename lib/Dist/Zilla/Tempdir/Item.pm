@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
@@ -191,7 +191,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 1.001000
+version 1.001001
 
 =head1 SYNOPSIS
 

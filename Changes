@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.001001 2014-07-29T09:22:01Z
+
 1.001000 2014-07-29T09:21:17Z
  [00 Major]
  - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.
