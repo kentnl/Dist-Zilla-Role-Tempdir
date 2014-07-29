@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Tempdir::Dir;
 
-our $VERSION = '1.000001';
+our $VERSION = '1.001000';
 
 # ABSTRACT: A temporary directory with a collection of item states
 
@@ -24,6 +24,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 use Moose qw( has );
+use Carp qw( croak );
 use File::chdir;
 use Dist::Zilla::Tempdir::Item::State;
 use Dist::Zilla::Tempdir::Item;
@@ -36,8 +37,22 @@ has '_tempdir' => (
   lazy_build => 1,
 );
 
+has '_tempdir_owner' => (
+  is        => ro =>,
+  predicate => '_has_tempdir_owner',
+);
+
 sub _build__tempdir {
-  return Path::Tiny->tempdir;
+  my ($self) = @_;
+
+  my $template = 'DZ_R_Tempdir_';
+  if ( $self->_has_tempdir_owner ) {
+    my $owner = $self->_tempdir_owner;
+    $owner =~ s/[^[:alpha:]\d]+/_/xmsg;
+    $template .= $owner . '_';
+  }
+  $template .= 'XXXXXX';
+  return Path::Tiny->tempdir( TEMPLATE => $template );
 }
 
 has '_input_files' => (
@@ -195,7 +210,64 @@ sub run_in {
   my ( $self, $code ) = @_;
   ## no critic ( ProhibitLocalVars )
   local $CWD = $self->_tempdir->stringify;
-  return $code->();
+  return $code->($self);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sub keepalive {
+  my $nargs = my ( $self, $keep ) = @_;
+
+  my $path = $self->_tempdir;
+
+  if ( $nargs < 2 ) {
+    return $path;
+  }
+
+  if ($keep) {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(0);
+  }
+  else {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(1);
+  }
+  return $path;
+}
+
+
+
+
+
+
+
+
+
+
+
+sub keepalive_fail {
+  my ( $self, $message ) = @_;
+
+  if ( not $message ) {
+    $message = q[];
+  }
+  else {
+    $message .= qq[\n];
+  }
+  $message .= q[Role::Tempdir's scratch directory preserved at ] . $self->keepalive(1);
+  croak $message;
 }
 
 no Moose;
@@ -215,7 +287,7 @@ Dist::Zilla::Tempdir::Dir - A temporary directory with a collection of item stat
 
 =head1 VERSION
 
-version 1.000001
+version 1.001000
 
 =head1 SYNOPSIS
 
@@ -273,6 +345,28 @@ and information ready for C<< ->files >>
   });
 
 Enter the temporary directory and run the passed code block, which is assumed to be creating/modifying/deleting files.
+
+=head2 C<keepalive>
+
+Utility method: Marks the temporary directory for preservation.
+
+  $dir->keepalive()  # simply returns the path to the tempdir
+  $dir->keepalive(1) # mark for retention
+  $dir->keepalive(0) # mark for erasure
+
+This is mostly an insane glue layer for
+
+  $dir->_tempdir->[Path::Tiny::TEMP]->unlink_on_destroy($x)
+
+Except the insanity of poking too many internal guts is well encapsulated.
+
+=head2 C<keepalive_fail>
+
+A utility method to invoke a croak (heh) that preserves the scratch directory, and tells
+the croak recipient where to find it.
+
+  $dir->keepalive_fail();
+  $dir->keepalive_fail("Some Diagnostic Reason");
 
 =head1 AUTHOR
 

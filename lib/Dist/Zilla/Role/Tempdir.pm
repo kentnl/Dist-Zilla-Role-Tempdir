@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
-our $VERSION = '1.000001';
+our $VERSION = '1.001000';
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
@@ -14,6 +14,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role;
 use Path::Tiny qw(path);
 use Dist::Zilla::Tempdir::Dir;
+use Scalar::Util qw( blessed );
 use namespace::autoclean;
 
 
@@ -83,7 +84,7 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my $tdir = Dist::Zilla::Tempdir::Dir->new();
+  my $tdir = Dist::Zilla::Tempdir::Dir->new( _tempdir_owner => blessed $self, );
 
   my $dzil = $self->zilla;
 
@@ -124,7 +125,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 1.000001
+version 1.001000
 
 =head1 SYNOPSIS
 

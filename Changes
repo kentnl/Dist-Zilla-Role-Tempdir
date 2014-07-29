@@ -1,13 +1,27 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.001000 2014-07-29T09:21:17Z
+ [00 Major]
+ - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.
+ - ::Dir nas new 'keepalive_fail' method to trigger a croak, keep the temporary directory, and tell the user where to
+   find it.
+ - ::Dir::run_in()  and thus, ::Role::Tempdir::capture_tempdir(), now pass the Dir object itself as $_[0] for easy
+   access.
+ - ::Dir now generates tempdirs with the prefix "DZ_R_Tempdir_" for easy cleanup if tempdirs are left around.
+ - ::Dir now supports property '_tempdir_owner' which will be normalised and included in the tempdir prefix if
+   specified.
+ - ::Role::Tempdir::capture_tempdir) now automatically passes the name of the consuming plugin as "_tempdir_owner",
+   giving consuming plugins clear tempdir locations when things fail.
+
 1.000001 2014-07-29T06:22:12Z
  [Bugfix]
  - encoded content fetching content was broken, and so, emitted files were all empty! Great!
 
  [Dependencies::Stats]
  - Dependencies changed since 1.000000, see misc/*.deps* for details
+ - configure: ↓1
  - develop: +3 -3 (suggests: +2 -1)
- - test: +2 ↑1 (recommends: +1)
+ - test: +3 ↑1 (recommends: +1)
 
 1.000000 2014-05-16T19:09:54Z
  [00 Major]
