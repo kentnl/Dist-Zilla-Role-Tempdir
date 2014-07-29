@@ -14,6 +14,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role;
 use Path::Tiny qw(path);
 use Dist::Zilla::Tempdir::Dir;
+use Scalar::Util qw( blessed );
 use namespace::autoclean;
 
 
@@ -83,7 +84,7 @@ sub capture_tempdir {
   $code = sub { }
     unless defined $code;
 
-  my $tdir = Dist::Zilla::Tempdir::Dir->new();
+  my $tdir = Dist::Zilla::Tempdir::Dir->new( _tempdir_owner => blessed $self, );
 
   my $dzil = $self->zilla;
 

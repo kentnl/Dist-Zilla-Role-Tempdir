@@ -37,8 +37,22 @@ has '_tempdir' => (
   lazy_build => 1,
 );
 
+has '_tempdir_owner' => (
+  is        => ro =>,
+  predicate => '_has_tempdir_owner',
+);
+
 sub _build__tempdir {
-  return Path::Tiny->tempdir;
+  my ($self) = @_;
+
+  my $template = 'Dist_Zilla_Role_Tempdir_';
+  if ( $self->_has_tempdir_owner ) {
+    my $owner = $self->_tempdir_owner;
+    $owner =~ s/[^A-Za-z0-9]+/_/g;
+    $template .= $owner . '_';
+  }
+  $template .= 'XXXXXX';
+  return Path::Tiny->tempdir( TEMPLATE => $template );
 }
 
 has '_input_files' => (
