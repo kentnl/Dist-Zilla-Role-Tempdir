@@ -33,7 +33,7 @@ my $called_capture = 0;
     my (@generated) = $self->capture_tempdir(
       sub {
         $called_capture = 1;
-        for my $child ( path('./')->children ) { 
+        for my $child ( path('./')->children ) {
           push @files, {
             path => $child,
             exists => -e $child,
