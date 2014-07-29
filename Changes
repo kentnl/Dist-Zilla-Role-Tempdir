@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Minor]
+ - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.
 
 1.000001 2014-07-29T06:22:12Z
  [Bugfix]

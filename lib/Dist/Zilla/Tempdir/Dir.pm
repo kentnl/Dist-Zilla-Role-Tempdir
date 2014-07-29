@@ -198,6 +198,41 @@ sub run_in {
   return $code->();
 }
 
+=method C<keepalive>
+
+Utility method: Marks the temporary directory for preservation.
+
+  $dir->keepalive()  # simply returns the path to the tempdir
+  $dir->keepalive(1) # mark for retention
+  $dir->keepalive(0) # mark for erasure
+
+This is mostly an insane glue layer for
+
+  $dir->_tempdir->[Path::Tiny::TEMP]->unlink_on_destroy($x)
+
+Except the insanity of poking too many internal guts is well encapsulated.
+
+=cut
+
+sub keepalive {
+  my $nargs = my ( $self, $keep ) = @_;
+
+  my $path = $self->_tempdir;
+
+  if ( $nargs < 2 ) {
+    return $path;
+  }
+
+  if ($keep) {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(0);
+  }
+  else {
+    $path->[Path::Tiny::TEMP]->unlink_on_destroy(1);
+  }
+  return $path;
+}
+
+
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
