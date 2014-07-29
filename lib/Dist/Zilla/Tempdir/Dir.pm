@@ -230,7 +230,7 @@ sub run_in {
 
 
 sub keepalive {
-  my $nargs = my ( $self, $keep ) = @_; 
+  my $nargs = my ( $self, $keep ) = @_;
 
   my $path = $self->_tempdir;
 
@@ -250,9 +250,9 @@ sub keepalive {
 sub keepalive_fail {
   my ( $self, $message ) = @_;
 
-  $message = qq[] unless $message;
+  $message = q[] unless $message;
   $message .= qq[\n];
-  $message .= "Role::Tempdir's scratch directory preserved at " . $self->keepalive(1);
+  $message .= q[Role::Tempdir's scratch directory preserved at ] . $self->keepalive(1);
   croak $message;
 }
 
