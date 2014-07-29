@@ -230,7 +230,7 @@ sub run_in {
 
 
 sub keepalive {
-  my ( $nargs, $self, $keep ) = ( scalar @_, @_ );
+  my $nargs = my ( $self, $keep ) = @_; 
 
   my $path = $self->_tempdir;
 
