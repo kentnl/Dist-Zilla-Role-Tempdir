@@ -34,11 +34,12 @@ my $called_capture = 0;
       sub {
         $called_capture = 1;
         for my $child ( path('./')->children ) {
-          push @files, {
-            path => $child,
+          push @files,
+            {
+            path   => $child,
             exists => -e $child,
-            lines => -e $child ? [ $child->lines_raw ]:[],
-          };
+            lines  => -e $child ? [ $child->lines_raw ] : [],
+            };
         }
       }
     );
@@ -76,18 +77,18 @@ ok( $called_capture, 'capture calls' );
 is( scalar @files, 2, 'has files' );
 
 subtest 'distini' => sub {
-  my ( $file, )=  grep { $_->{path}->basename eq 'dist.ini' } @files;
-  ok( $file,  'has dist.ini' );
-  ok( $file->{exists}, 'dist.ini exists on disk' );
-  ok( scalar @{$file->{lines}}, 'dist.ini has lines' )
+  my ( $file, ) = grep { $_->{path}->basename eq 'dist.ini' } @files;
+  ok( $file,                      'has dist.ini' );
+  ok( $file->{exists},            'dist.ini exists on disk' );
+  ok( scalar @{ $file->{lines} }, 'dist.ini has lines' )
 
 };
 subtest 'distpm' => sub {
-  my ( $file, )=  grep { $_->{path}->basename eq 'dist.pm' } @files;
-  ok( $file,  'has dist.pm' );
+  my ( $file, ) = grep { $_->{path}->basename eq 'dist.pm' } @files;
+  ok( $file,           'has dist.pm' );
   ok( $file->{exists}, 'dist.ini exists on disk' );
 
-  ok( scalar @{$file->{lines}}, 'dist.pm has lines' );
+  ok( scalar @{ $file->{lines} }, 'dist.pm has lines' );
 };
 
 done_testing;
