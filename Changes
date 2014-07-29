@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-1.000001 2014-07-29T05:58:40Z
+1.000001 2014-07-29T06:06:29Z
  [Bugfix]
  - encoded content fetching content was broken, and so, emitted files were all empty! Great!
 

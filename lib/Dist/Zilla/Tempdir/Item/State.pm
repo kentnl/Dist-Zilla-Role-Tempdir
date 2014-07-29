@@ -140,7 +140,6 @@ sub write_out {
   my ($self) = @_;
   my $out_path = $self->_relpath();
   $out_path->parent->mkpath(1);
-  $self->_encoded_content;
   $out_path->spew_raw( $self->_encoded_content );
   return;
 }
