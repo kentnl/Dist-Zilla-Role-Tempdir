@@ -210,7 +210,7 @@ sub run_in {
   my ( $self, $code ) = @_;
   ## no critic ( ProhibitLocalVars )
   local $CWD = $self->_tempdir->stringify;
-  return $code->($self);
+  return $code->();
 }
 
 
@@ -247,11 +247,25 @@ sub keepalive {
   return $path;
 }
 
+
+
+
+
+
+
+
+
+
+
 sub keepalive_fail {
   my ( $self, $message ) = @_;
 
-  $message = q[] unless $message;
-  $message .= qq[\n];
+  if ( not $message ) {
+    $message = q[];
+  }
+  else {
+    $message .= qq[\n];
+  }
   $message .= q[Role::Tempdir's scratch directory preserved at ] . $self->keepalive(1);
   croak $message;
 }
@@ -345,6 +359,14 @@ This is mostly an insane glue layer for
   $dir->_tempdir->[Path::Tiny::TEMP]->unlink_on_destroy($x)
 
 Except the insanity of poking too many internal guts is well encapsulated.
+
+=head2 C<keepalive_fail>
+
+A utility method to invoke a croak (heh) that preserves the scratch directory, and tells
+the croak recipient where to find it.
+
+  $dir->keepalive_fail();
+  $dir->keepalive_fail("Some Diagnostic Reason");
 
 =head1 AUTHOR
 
