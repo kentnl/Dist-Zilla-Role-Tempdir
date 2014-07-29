@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Tempdir::Dir;
 
-our $VERSION = '1.000002';
+our $VERSION = '1.001000';
 
 # ABSTRACT: A temporary directory with a collection of item states
 
@@ -45,7 +45,7 @@ has '_tempdir_owner' => (
 sub _build__tempdir {
   my ($self) = @_;
 
-  my $template = 'Dist_Zilla_Role_Tempdir_';
+  my $template = 'DZ_R_Tempdir_';
   if ( $self->_has_tempdir_owner ) {
     my $owner = $self->_tempdir_owner;
     $owner =~ s/[^A-Za-z0-9]+/_/g;
@@ -213,6 +213,22 @@ sub run_in {
   return $code->($self);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sub keepalive {
   my ( $nargs, $self, $keep ) = ( scalar @_, @_ );
 
@@ -257,7 +273,7 @@ Dist::Zilla::Tempdir::Dir - A temporary directory with a collection of item stat
 
 =head1 VERSION
 
-version 1.000002
+version 1.001000
 
 =head1 SYNOPSIS
 
@@ -315,6 +331,20 @@ and information ready for C<< ->files >>
   });
 
 Enter the temporary directory and run the passed code block, which is assumed to be creating/modifying/deleting files.
+
+=head2 C<keepalive>
+
+Utility method: Marks the temporary directory for preservation.
+
+  $dir->keepalive()  # simply returns the path to the tempdir
+  $dir->keepalive(1) # mark for retention
+  $dir->keepalive(0) # mark for erasure
+
+This is mostly an insane glue layer for
+
+  $dir->_tempdir->[Path::Tiny::TEMP]->unlink_on_destroy($x)
+
+Except the insanity of poking too many internal guts is well encapuslated.
 
 =head1 AUTHOR
 
