@@ -5,6 +5,8 @@
  - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.
  - ::Dir nas new 'keepalive_fail' method to trigger a croak, keep the temporary directory, and tell the user where to
    find it.
+ - ::Dir::run_in()  and thus, ::Role::Tempdir::capture_tempdir(), now pass the Dir object itself as $_[0] for easy
+   access.
 
 1.000001 2014-07-29T06:22:12Z
  [Bugfix]

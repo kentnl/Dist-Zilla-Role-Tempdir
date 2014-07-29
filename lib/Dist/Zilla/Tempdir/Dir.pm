@@ -196,7 +196,7 @@ sub run_in {
   my ( $self, $code ) = @_;
   ## no critic ( ProhibitLocalVars )
   local $CWD = $self->_tempdir->stringify;
-  return $code->();
+  return $code->($self);
 }
 
 =method C<keepalive>
