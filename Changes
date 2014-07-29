@@ -7,6 +7,9 @@
    find it.
  - ::Dir::run_in()  and thus, ::Role::Tempdir::capture_tempdir(), now pass the Dir object itself as $_[0] for easy
    access.
+ - ::Dir now generates tempdirs with the prefix "DZ_R_Tempdir_" for easy cleanup if tempdirs are left around.
+ - ::Dir now supports property '_tempdir_owner' which will be normalised and included in the tempdir prefix if
+   specified.
 
 1.000001 2014-07-29T06:22:12Z
  [Bugfix]
