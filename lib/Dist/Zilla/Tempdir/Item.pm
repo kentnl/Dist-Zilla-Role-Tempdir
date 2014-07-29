@@ -4,7 +4,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item;
-$Dist::Zilla::Tempdir::Item::VERSION = '1.000000';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
@@ -189,7 +191,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 SYNOPSIS
 

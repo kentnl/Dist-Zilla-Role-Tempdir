@@ -4,7 +4,9 @@ use warnings;
 use utf8;
 
 package Dist::Zilla::Tempdir::Dir;
-$Dist::Zilla::Tempdir::Dir::VERSION = '1.000000';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: A temporary directory with a collection of item states
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
@@ -213,7 +215,7 @@ Dist::Zilla::Tempdir::Dir - A temporary directory with a collection of item stat
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 SYNOPSIS
 

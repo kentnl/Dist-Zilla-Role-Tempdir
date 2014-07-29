@@ -4,7 +4,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Tempdir;
-$Dist::Zilla::Role::Tempdir::VERSION = '1.000000';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
@@ -122,7 +124,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 SYNOPSIS
 

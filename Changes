@@ -1,5 +1,14 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.000001 2014-07-29T06:22:12Z
+ [Bugfix]
+ - encoded content fetching content was broken, and so, emitted files were all empty! Great!
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000000, see misc/*.deps* for details
+ - develop: +3 -3 (suggests: +2 -1)
+ - test: +2 ↑1 (recommends: +1)
+
 1.000000 2014-05-16T19:09:54Z
  [00 Major]
  - DZil Encoding support added.
@@ -12,20 +21,17 @@
  - $item->{state} may also vanish in the near future, stop using it.
 
  [02 Dzil Encoding Support]
- - Should now be compatible with DZil 5, and reading files from a tempdir
-   will now default to reading their content as "encoded_content" to an
-   InMemory object.
+ - Should now be compatible with DZil 5, and reading files from a tempdir will now default to reading their content as
+   "encoded_content" to an InMemory object.
 
  [03 Path/IO Replaced]
- - Usage of Path::Class and File::Slurp have both been eliminated and
-   replaced by Path::Tiny
+ - Usage of Path::Class and File::Slurp have both been eliminated and replaced by Path::Tiny
  - File::Find::Rule is replaced with Path::Iterator::Rule
  - File::Tempdir usage eliminated in favour of custom + Path::Tiny
 
  [04 Toolkit moved to EUMM]
  - Toolkit is now EUMM instead of Module::Build
- - Toolkit upgrade dependencies now prefer "latest" via "recommends",
-   instead of "requires"
+ - Toolkit upgrade dependencies now prefer "latest" via "recommends", instead of "requires"
 
  [05 Version Scheme change]
  - Mantissa length has shortened to 6
@@ -41,8 +47,7 @@
  - 5.019009 : 163
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01053722, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01053722, see misc/*.deps* for details
  - build: -1
  - configure: +1 -1 (recommends: +1)
  - develop: +44 -2 (recommends: -1, suggests: +1 -1)
@@ -57,8 +62,7 @@
  - Test::More 0.88 → 0.98
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01053721, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01053721, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +5 (recommends: ↑1, suggests: ↑1)
@@ -78,8 +82,7 @@
  - Maintenance release
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01053720, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01053720, see misc/*.deps* for details
  - develop: (suggests: ↑1)
  - runtime: +3 -1
  - test: -1
@@ -99,8 +102,7 @@
  - Maintenance only release, no really user visible changes.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01027622, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01027622, see misc/*.deps* for details
  - develop: +1 (recommends: +1, suggests: +1)
  - test: +1 -1
 
@@ -117,15 +119,13 @@
  - Add cpan-changes tests.
 
 0.01027622 2010-07-23T21:29:14Z
- - Dropped the hardcoded Test::Kwalitee xt-test in favour of the
-   TestKwalitee plugin. ( This will hopefully get this module and all
-   dependents out of the heavy 100 )
+ - Dropped the hardcoded Test::Kwalitee xt-test in favour of the TestKwalitee plugin. ( This will hopefully get this
+   module and all dependents out of the heavy 100 )
  - Documentation updated a bit.
  - digest_for is now a public method.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01021401, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01021401, see misc/*.deps* for details
  - build: -9
  - runtime: +2
  - test: +8
@@ -141,8 +141,7 @@
  - upgrade to Dist::Zilla 2
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01000003, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01000003, see misc/*.deps* for details
  - build: +10
  - configure: +1
  - runtime: +2 ↑1
