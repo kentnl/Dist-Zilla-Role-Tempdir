@@ -60,7 +60,7 @@ do { my $x = {
                                     },
                       'suggests' => {
                                       'Dist::Zilla::App::Command::bakeini' => '0.001001',
-                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016005'
+                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016007'
                                     }
                     },
        'runtime' => {
@@ -85,9 +85,7 @@ do { my $x = {
                     },
        'test' => {
                    'recommends' => {
-                                     'CPAN::Meta' => '0',
-                                     'CPAN::Meta::Prereqs' => '0',
-                                     'CPAN::Meta::Requirements' => '2.120900',
+                                     'CPAN::Meta' => '2.120900',
                                      'ExtUtils::MakeMaker' => '6.98',
                                      'Test::More' => '1.001003'
                                    },
@@ -99,11 +97,7 @@ do { my $x = {
                                    'Dist::Zilla::Tester' => '0',
                                    'ExtUtils::MakeMaker' => '0',
                                    'File::Spec' => '0',
-                                   'File::Spec::Functions' => '0',
-                                   'List::Util' => '0',
-                                   'Scalar::Util' => '0',
-                                   'Test::More' => '0.89',
-                                   'version' => '0.77'
+                                   'Test::More' => '0.89'
                                  }
                  }
      };
