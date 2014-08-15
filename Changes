@@ -7,7 +7,7 @@
 
  [Dependencies::Stats]
  - Dependencies changed since 1.001000, see misc/*.deps* for details
- - develop: (suggests: ↑1)
+ - develop: +1 (suggests: ↑1)
  - test: -4 (recommends: ↑1 -2)
 
  [Tests]
