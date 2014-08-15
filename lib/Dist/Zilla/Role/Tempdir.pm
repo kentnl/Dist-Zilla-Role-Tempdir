@@ -38,45 +38,6 @@ use namespace::autoclean;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 sub capture_tempdir {
   my ( $self, $code, $args ) = @_;
 
@@ -99,16 +60,6 @@ sub capture_tempdir {
 
   return $tdir->files;
 }
-
-
-
-
-
-
-
-
-
-
 
 no Moose::Role;
 1;

@@ -33,33 +33,6 @@ use Scalar::Util qw( blessed );
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 has 'status' => (
   isa           => 'Str',
   lazy_required => 1,
@@ -84,8 +57,6 @@ has 'file' => (
   is       => 'rw',
   handles  => { name => 'name' },
 );
-
-
 
 
 
@@ -121,8 +92,6 @@ sub _mk_status {
   }
   return 1;
 }
-
-
 
 
 
@@ -216,38 +185,13 @@ make a typo or add invisible white-space is a Good Thing.
 fact we're doing file-system IO and running many of the files through a complete hashing
 algorithm to test for modification.
 
-=head1 ATTRIBUTES
-
-=head2 status
-
-  isa => Str,
-  is  => rw,
-
-The internal status character. You can mangle this yourself if you want, and for compatibility with older versions
-of this dist, you may even have to, but try not to, if it breaks, something something something pieces.
-
-Using the is_* and set_* accessors is a I<much> smarter idea.
-
-At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforeseeable expanding it to
-be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;) )
-
-=head2 file
-
-  isa      => Dist::Zilla::Role::File,
-  required => 1,
-  is       => rw
-
-This is the Dist::Zilla::File::* item which we refer to. For items that C<is_deleted>, C<file> is likely to be the file before it got deleted.
-
-For C<is_new> and C<is_original> files, the item is the file itself, and for C<is_modified>, its the modified version of the file.
+=head1 METHODS
 
 =head2 name
 
 Proxy for C<< $item->file->name >>
 
 This is the path to the file relative to the dist root.
-
-=head1 METHODS
 
 =head2 is_modified
 
@@ -281,6 +225,31 @@ returns if the file is deleted or not ( that is, if it were deleted during the e
 =head2 set_deleted
 
 sets the state to 'deleted'
+
+=head1 ATTRIBUTES
+
+=head2 status
+
+  isa => Str,
+  is  => rw,
+
+The internal status character. You can mangle this yourself if you want, and for compatibility with older versions
+of this dist, you may even have to, but try not to, if it breaks, something something something pieces.
+
+Using the is_* and set_* accessors is a I<much> smarter idea.
+
+At present, the characters M, O, N and D have defined meanings, but this could change. ( Its not even unforeseeable expanding it to
+be 2 characters to represent different parts of state, I probably will not do that, but do not pretend I will not ;) )
+
+=head2 file
+
+  isa      => Dist::Zilla::Role::File,
+  required => 1,
+  is       => rw
+
+This is the Dist::Zilla::File::* item which we refer to. For items that C<is_deleted>, C<file> is likely to be the file before it got deleted.
+
+For C<is_new> and C<is_original> files, the item is the file itself, and for C<is_modified>, its the modified version of the file.
 
 =head1 AUTHOR
 
