@@ -18,34 +18,7 @@ use namespace::autoclean;
 use Carp qw(croak);
 use Scalar::Util qw( blessed );
 
-=head1 SYNOPSIS
-
-  my $foo = Dist::Zilla::Tempdir::Item->new(
-    name => 'Path/To/File.txt',
-    file => $dzilfile,
-  );
-  $foo->set_new;
-  $foo->is_new; # true
-  $foo->is_deleted; # false
-  $foo->set_deleted;
-  $foo->is_new; # false
-  $foo->is_deleted; # true.
-
-Ultimately, I figured using a character with "C<eq>" every where in extending code
-was a way to extra bugs that were hard to detect. Going via all the Object-Oriented niceness
-you'll probably incur* a small performance penalty,  but things going B<Bang> when you
-make a typo or add invisible white-space is a Good Thing.
-
-* albeit immeasurably insignificant in size, especially for something that will only take
-15 seconds of run-time every once in a while, not to mention the overhead is drowned by the
-fact we're doing file-system IO and running many of the files through a complete hashing
-algorithm to test for modification.
-
-=cut
-
-=head1 ATTRIBUTES
-
-=head2 status
+=attr status
 
   isa => Str,
   is  => rw,
@@ -66,7 +39,7 @@ has 'status' => (
   is            => 'rw',
 );
 
-=head2 file
+=attr file
 
   isa      => Dist::Zilla::Role::File,
   required => 1,
@@ -85,13 +58,11 @@ has 'file' => (
   handles  => { name => 'name' },
 );
 
-=head2 name
+=method name
 
 Proxy for C<< $item->file->name >>
 
 This is the path to the file relative to the dist root.
-
-
 
 =cut
 
@@ -122,13 +93,11 @@ sub _mk_status {
   return 1;
 }
 
-=head1 METHODS
-
-=head2 is_modified
+=method is_modified
 
 returns if the file is modified or not.
 
-=head2 set_modified
+=method set_modified
 
 sets the state to 'modified'
 
@@ -136,11 +105,11 @@ sets the state to 'modified'
 
 _mk_status( 'modified', 'M' );
 
-=head2 is_original
+=method is_original
 
 returns if the file is the original file or not.
 
-=head2 set_original
+=method set_original
 
 sets the state to 'original'
 
@@ -148,12 +117,12 @@ sets the state to 'original'
 
 _mk_status( 'original', 'O' );
 
-=head2 is_new
+=method is_new
 
 returns if the file is new or not ( that is, if it wasn't in the dist prior to executing
 the given code ).
 
-=head2 set_new
+=method set_new
 
 sets the state to 'new'
 
@@ -161,11 +130,11 @@ sets the state to 'new'
 
 _mk_status( 'new', 'N' );
 
-=head2 is_deleted
+=method is_deleted
 
 returns if the file is deleted or not ( that is, if it were deleted during the execution phase )
 
-=head2 set_deleted
+=method set_deleted
 
 sets the state to 'deleted'
 
@@ -178,3 +147,28 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 
 1;
+
+=head1 SYNOPSIS
+
+  my $foo = Dist::Zilla::Tempdir::Item->new(
+    name => 'Path/To/File.txt',
+    file => $dzilfile,
+  );
+  $foo->set_new;
+  $foo->is_new; # true
+  $foo->is_deleted; # false
+  $foo->set_deleted;
+  $foo->is_new; # false
+  $foo->is_deleted; # true.
+
+Ultimately, I figured using a character with "C<eq>" every where in extending code
+was a way to extra bugs that were hard to detect. Going via all the Object-Oriented niceness
+you'll probably incur* a small performance penalty,  but things going B<Bang> when you
+make a typo or add invisible white-space is a Good Thing.
+
+* albeit immeasurably insignificant in size, especially for something that will only take
+15 seconds of run-time every once in a while, not to mention the overhead is drowned by the
+fact we're doing file-system IO and running many of the files through a complete hashing
+algorithm to test for modification.
+
+=cut

@@ -17,6 +17,53 @@ use Dist::Zilla::Tempdir::Dir;
 use Scalar::Util qw( blessed );
 use namespace::autoclean;
 
+=method capture_tempdir
+
+Creates a temporary and dumps the current state of Dist::Zilla's files into it.
+
+Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the changed files.
+
+  my ( @array ) = $self->capture_tempdir(sub{
+
+  });
+
+Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
+
+   [ bless( { name => 'file/Name/Here' ,
+      status => 'O' # O = Original, N = New, M = Modified, D = Deleted
+      file   => Dist::Zilla::Role::File object
+    }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
+
+Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
+
+=cut
+
+sub capture_tempdir {
+  my ( $self, $code, $args ) = @_;
+
+  $args = {} unless defined $args;
+  $code = sub { }
+    unless defined $code;
+
+  my $tdir = Dist::Zilla::Tempdir::Dir->new( _tempdir_owner => blessed $self, );
+
+  my $dzil = $self->zilla;
+
+  for my $file ( @{ $dzil->files } ) {
+    $tdir->add_file($file);
+  }
+
+  $tdir->run_in($code);
+
+  $tdir->update_input_files;
+  $tdir->update_disk_files;
+
+  return $tdir->files;
+}
+
+no Moose::Role;
+1;
+
 =head1 SYNOPSIS
 
   package #
@@ -51,55 +98,6 @@ Important to note however, this role B<ONLY> deals with getting C<Dist::Zilla>'s
 executing your given arbitrary code, and then collecting the results. At no point does it attempt to re-inject
 those changes back into L<< C<Dist::Zilla>|Dist::Zilla >>. That is left as an exercise to the plug-in developer.
 
-=cut
-
-=head1 METHODS
-
-=head2 capture_tempdir
-
-Creates a temporary and dumps the current state of Dist::Zilla's files into it.
-
-Runs the specified code sub C<chdir>'ed into that C<tmpdir>, and captures the changed files.
-
-  my ( @array ) = $self->capture_tempdir(sub{
-
-  });
-
-Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
-
-   [ bless( { name => 'file/Name/Here' ,
-      status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-      file   => Dist::Zilla::Role::File object
-    }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
-
-Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
-
-
-=cut
-
-sub capture_tempdir {
-  my ( $self, $code, $args ) = @_;
-
-  $args = {} unless defined $args;
-  $code = sub { }
-    unless defined $code;
-
-  my $tdir = Dist::Zilla::Tempdir::Dir->new( _tempdir_owner => blessed $self, );
-
-  my $dzil = $self->zilla;
-
-  for my $file ( @{ $dzil->files } ) {
-    $tdir->add_file($file);
-  }
-
-  $tdir->run_in($code);
-
-  $tdir->update_input_files;
-  $tdir->update_disk_files;
-
-  return $tdir->files;
-}
-
 =head1 SEE ALSO
 
 =over 4
@@ -109,7 +107,3 @@ sub capture_tempdir {
 =back
 
 =cut
-
-no Moose::Role;
-1;
-
