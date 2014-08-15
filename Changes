@@ -1,13 +1,17 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-1.001001 2014-08-05T09:16:02Z
+1.001001 2014-08-15T21:32:27Z
  [00 Trivial]
- - update ReportVersions test
+ - CPANDAY!
+ - no code changes.
 
  [Dependencies::Stats]
  - Dependencies changed since 1.001000, see misc/*.deps* for details
  - develop: +1 (suggests: ↑1)
  - test: -4 (recommends: ↑1 -2)
+
+ [Tests]
+ - update ReportPrereqs test
 
 1.001000 2014-07-29T09:21:17Z
  [00 Major]
