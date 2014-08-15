@@ -336,11 +336,11 @@ x_Dist_Zilla:
               version: '4.006'
             -
               class: Pod::Weaver::Section::Collect
-              name: METHODS
+              name: ATTRIBUTES
               version: '4.006'
             -
               class: Pod::Weaver::Section::Collect
-              name: ATTRIBUTES
+              name: METHODS
               version: '4.006'
             -
               class: Pod::Weaver::Section::Collect
