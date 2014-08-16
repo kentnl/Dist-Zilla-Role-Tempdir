@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
 
-our $VERSION = '1.001001';
+our $VERSION = '1.001002';
 
 # ABSTRACT: Intermediate state for a file
 
@@ -185,7 +185,7 @@ Dist::Zilla::Tempdir::Item::State - Intermediate state for a file
 
 =head1 VERSION
 
-version 1.001001
+version 1.001002
 
 =head1 ATTRIBUTES
 
