@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Tempdir::Dir;
 
-our $VERSION = '1.001001';
+our $VERSION = '1.001002';
 
 # ABSTRACT: A temporary directory with a collection of item states
 
