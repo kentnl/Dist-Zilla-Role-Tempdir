@@ -44,13 +44,9 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Tester" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
-    "File::Spec::Functions" => 0,
-    "List::Util" => 0,
-    "Scalar::Util" => 0,
-    "Test::More" => "0.89",
-    "version" => "0.77"
+    "Test::More" => "0.89"
   },
-  "VERSION" => "1.001000",
+  "VERSION" => "1.001001",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }
@@ -68,9 +64,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Tester" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
-  "File::Spec::Functions" => 0,
   "File::chdir" => "0.1002",
-  "List::Util" => 0,
   "Moose" => "0.92",
   "Moose::Role" => 0,
   "MooseX::LazyRequire" => 0,
@@ -81,7 +75,6 @@ my %FallbackPrereqs = (
   "namespace::autoclean" => "0.09",
   "strict" => 0,
   "utf8" => 0,
-  "version" => "0.77",
   "warnings" => 0
 );
 

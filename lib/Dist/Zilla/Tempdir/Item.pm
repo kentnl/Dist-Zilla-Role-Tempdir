@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
@@ -17,33 +17,6 @@ use namespace::autoclean;
 
 use Carp qw(croak);
 use Scalar::Util qw( blessed );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -93,8 +66,6 @@ has 'file' => (
 
 
 
-
-
 sub _mk_status {
   my $name  = shift;
   my $value = shift;
@@ -121,8 +92,6 @@ sub _mk_status {
   }
   return 1;
 }
-
-
 
 
 
@@ -191,7 +160,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 1.001000
+version 1.001001
 
 =head1 SYNOPSIS
 
@@ -241,13 +210,13 @@ This is the Dist::Zilla::File::* item which we refer to. For items that C<is_del
 
 For C<is_new> and C<is_original> files, the item is the file itself, and for C<is_modified>, its the modified version of the file.
 
+=head1 METHODS
+
 =head2 name
 
 Proxy for C<< $item->file->name >>
 
 This is the path to the file relative to the dist root.
-
-=head1 METHODS
 
 =head2 is_modified
 

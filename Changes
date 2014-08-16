@@ -1,5 +1,27 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.001001 2014-08-15T21:39:24Z
+ [00 Trivial]
+ - CPANDAY!
+ - no code changes.
+ - tests augmented.
+ - whitespace adjusted.
+ - POD reorganised.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.001000, see misc/*.deps* for details
+ - develop: +1 (suggests: ↑1)
+ - test: -4 (recommends: ↑1 -2)
+
+ [Documentation]
+ - POD reorganised for consistency.
+
+ [Misc]
+ - Improve source side POD to reduce build side whitespace.
+
+ [Tests]
+ - update ReportPrereqs test
+
 1.001000 2014-07-29T09:21:17Z
  [00 Major]
  - ::Dir has new 'keepalive' method to mark/unmark scratch dirs for destruction.

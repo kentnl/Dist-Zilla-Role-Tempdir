@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
@@ -16,45 +16,6 @@ use Path::Tiny qw(path);
 use Dist::Zilla::Tempdir::Dir;
 use Scalar::Util qw( blessed );
 use namespace::autoclean;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,16 +61,6 @@ sub capture_tempdir {
   return $tdir->files;
 }
 
-
-
-
-
-
-
-
-
-
-
 no Moose::Role;
 1;
 
@@ -125,7 +76,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 1.001000
+version 1.001001
 
 =head1 SYNOPSIS
 

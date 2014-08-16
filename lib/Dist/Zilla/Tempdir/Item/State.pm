@@ -5,7 +5,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Item::State;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 # ABSTRACT: Intermediate state for a file
 
@@ -185,26 +185,7 @@ Dist::Zilla::Tempdir::Item::State - Intermediate state for a file
 
 =head1 VERSION
 
-version 1.001000
-
-=head1 METHODS
-
-=head2 C<BUILD>
-
-Ensures C<hash> is populated at build time.
-
-=head2 C<write_out>
-
-Emits C<file> into C<storage_prefix>
-
-=head2 C<on_disk>
-
-Returns true if C<file> exists in C<storage_prefix>
-
-=head2 C<on_disk_changed>
-
-Returns true if the file is on disk, and the on-disk hash
-doesn't match the written out C<file>'s hash.
+version 1.001001
 
 =head1 ATTRIBUTES
 
@@ -227,6 +208,25 @@ Hash of C<new_content>
 =head2 C<storage_prefix>
 
 The root directory to write this file out to, and to read it from.
+
+=head1 METHODS
+
+=head2 C<BUILD>
+
+Ensures C<hash> is populated at build time.
+
+=head2 C<write_out>
+
+Emits C<file> into C<storage_prefix>
+
+=head2 C<on_disk>
+
+Returns true if C<file> exists in C<storage_prefix>
+
+=head2 C<on_disk_changed>
+
+Returns true if the file is on disk, and the on-disk hash
+doesn't match the written out C<file>'s hash.
 
 =head1 AUTHOR
 
