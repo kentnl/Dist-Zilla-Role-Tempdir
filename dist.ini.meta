@@ -1,18 +1,17 @@
+; vim: syntax=dosini
 name    = Dist-Zilla-Role-Tempdir
 author  = Kent Fredric <kentnl@cpan.org>
 license = Perl_5
-copyright_holder = Kent Fredric
+copyright_holder = Kent Fredric <kentfredric@gmail.com>
 
 [@Author::KENTNL]
 :version = 2.013
-git_versions = 1
-twitter_hash_tags = #perl #cpan
+twitter_extra_hash_tags = #distzilla
 normal_form       = numify
 mantissa          = 6
 toolkit           = eumm
 toolkit_hardness  = soft
 bumpversions      = 1
-copyfiles         = LICENSE
 srcreadme         = mkdn
 
 ;version_major  = 0

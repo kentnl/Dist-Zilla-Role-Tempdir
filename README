@@ -1,76 +1,28 @@
-NAME
-    Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ
-    plug-in.
+Dist::Zilla::Role::Tempdir
 
-VERSION
-    version 1.001002
 
-SYNOPSIS
-      package #
-        Dist::Zilla::Plugin::FooBar;
 
-      use Moose;
-      with 'Dist::Zilla::Role::Tempdir';
-      with 'Dist::Zilla::Role::FileInjector';
-      with 'Dist::Zilla::Role::InstallTool';
+INSTALLATION
 
-      sub setup_installer {
-        my ( $self, $arg ) = @_ ;
+This is a Perl module distribution. It should be installed with whichever
+tool you use to manage your installation of Perl, e.g. any of
 
-        my ( @generated_files ) = $self->capture_tempdir(sub{
-          system( $somecommand );
-        });
+  cpanm .
+  cpan  .
+  cpanp -i .
 
-        for ( @generated_files ) {
-          if( $_->is_new && $_->name =~ qr/someregex/ ){
-            $self->add_file( $_->file );
-          }
-        }
-      }
+Consult http://www.cpan.org/modules/INSTALL.html for further instruction.
+Should you wish to install this module manually, the procedure is
 
-    This role is a convenience role for factoring into other plug-ins to use
-    the power of Unix in any plug-in.
-
-    If for whatever reason you need to shell out and run your own app that
-    is not Perl ( i.e.: Java ) to go through the code and make
-    modifications, produce documentation, etc, then this role is for you.
-
-    Important to note however, this role ONLY deals with getting
-    "Dist::Zilla"'s state written out to disk, executing your given
-    arbitrary code, and then collecting the results. At no point does it
-    attempt to re-inject those changes back into "Dist::Zilla". That is left
-    as an exercise to the plug-in developer.
-
-METHODS
-  capture_tempdir
-    Creates a temporary and dumps the current state of Dist::Zilla's files
-    into it.
-
-    Runs the specified code sub "chdir"'ed into that "tmpdir", and captures
-    the changed files.
-
-      my ( @array ) = $self->capture_tempdir(sub{
-
-      });
-
-    Response is an array of "::Tempdir::Item"
-
-       [ bless( { name => 'file/Name/Here' ,
-          status => 'O' # O = Original, N = New, M = Modified, D = Deleted
-          file   => Dist::Zilla::Role::File object
-        }, 'Dist::Zilla::Tempdir::Item' ) , bless ( ... ) ..... ]
-
-    Make sure to look at "Dist::Zilla::Tempdir::Item" for usage.
-
-SEE ALSO
-    *   "Dist::Zilla::Tempdir::Item"
-
-AUTHOR
-    Kent Fredric <kentnl@cpan.org>
+  perl Makefile.PL
+  make
+  make test
+  make install
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2014 by Kent Fredric.
 
-    This is free software; you can redistribute it and/or modify it under
-    the same terms as the Perl 5 programming language system itself.
+This software is copyright (c) 2016 by Kent Fredric
+<kentfredric@gmail.com>.
 
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
