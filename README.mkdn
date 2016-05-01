@@ -12,9 +12,9 @@ version 1.001002
       Dist::Zilla::Plugin::FooBar;
 
     use Moose;
-    with 'Dist::Zilla::Role::Tempdir';
     with 'Dist::Zilla::Role::FileInjector';
     with 'Dist::Zilla::Role::InstallTool';
+    with 'Dist::Zilla::Role::Tempdir';
 
     sub setup_installer {
       my ( $self, $arg ) = @_ ;

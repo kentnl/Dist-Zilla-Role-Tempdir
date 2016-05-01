@@ -31,6 +31,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Dist::Zilla 5
 
  [Added / test requires]
+ - Dist::Zilla::Role::Plugin
  - perl 5.006
 
  [Changed / configure recommends]

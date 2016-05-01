@@ -10,12 +10,21 @@ our $VERSION = '1.001002';
 
 # AUTHORITY
 
-use Moose::Role;
+use Moose::Role qw( around with );
 use Path::Tiny qw(path);
 use Dist::Zilla::Tempdir::Dir;
 use Scalar::Util qw( blessed );
 use namespace::autoclean;
 
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
+  $payload->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  return $config;
+};
+
+no Moose::Role;
 =method capture_tempdir
 
 Creates a temporary and dumps the current state of Dist::Zilla's files into it.
@@ -36,6 +45,8 @@ Response is an array of L<< C<::Tempdir::Item>|Dist::Zilla::Tempdir::Item >>
 Make sure to look at L<< C<Dist::Zilla::Tempdir::Item>|Dist::Zilla::Tempdir::Item >> for usage.
 
 =cut
+
+
 
 sub capture_tempdir {
   my ( $self, $code, $args ) = @_;
@@ -60,7 +71,6 @@ sub capture_tempdir {
   return $tdir->files;
 }
 
-no Moose::Role;
 1;
 
 =head1 SYNOPSIS
@@ -69,9 +79,9 @@ no Moose::Role;
     Dist::Zilla::Plugin::FooBar;
 
   use Moose;
-  with 'Dist::Zilla::Role::Tempdir';
   with 'Dist::Zilla::Role::FileInjector';
   with 'Dist::Zilla::Role::InstallTool';
+  with 'Dist::Zilla::Role::Tempdir';
 
   sub setup_installer {
     my ( $self, $arg ) = @_ ;
