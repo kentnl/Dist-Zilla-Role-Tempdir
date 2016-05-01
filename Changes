@@ -1,5 +1,17 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
+1.001002 2016-05-01T00:22:36Z edbd3ac
+ - Added MetaConfig data to consumers.
+ - This however requires a TRIAL releases, as this change module requires ::Plugin to already be composed in, but our
+   tests and documentation unfortunately instructed users to compose it in *before* that, leading to a breakage.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.001001, see misc/*.deps* for details
+ - configure: +1 (recommends: ↑1)
+ - develop: +14 ↑3 -3 (recommends: +1, suggests: ↑2)
+ - runtime: ↓1 -1 (recommends: +2)
+ - test: +2 (recommends: +1 ↑1 ↓1)
+
 1.001001 2014-08-15T21:39:24Z
  [00 Trivial]
  - CPANDAY!
@@ -184,4 +196,3 @@
 
 0.01000003 2009-10-26T02:51:22Z
  - First version.
-

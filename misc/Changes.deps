@@ -1,6 +1,20 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.001001
+1.001002
+ [Added / configure requires]
+ - perl 5.006
+
+ [Added / test requires]
+ - Dist::Zilla::Role::Plugin
+ - perl 5.006
+
+ [Changed / runtime requires]
+ - perl 5.008 → 5.006
+
+ [Removed / runtime requires]
+ - utf8
+
+1.001001 2014-08-15T21:39:24Z
  [Removed / test requires]
  - File::Spec::Functions
  - List::Util
@@ -137,4 +151,3 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
 
  [Changed / runtime requires]
  - Dist::Zilla 1.092930 → 2.0
-

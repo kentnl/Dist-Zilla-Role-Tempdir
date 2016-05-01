@@ -1,11 +1,10 @@
-use 5.008;    # 08 -> [utf8], 06 -> [pragmas, our]
-use utf8;
+use 5.006;    #06 -> [pragmas, our]
 use strict;
 use warnings;
 
 package Dist::Zilla::Tempdir::Item;
 
-our $VERSION = '1.001001';
+our $VERSION = '1.001002'; # TRIAL
 
 # ABSTRACT: A result object for things that DO() DZ::R::Tempdir;
 
@@ -160,7 +159,7 @@ Dist::Zilla::Tempdir::Item - A result object for things that DO() DZ::R::Tempdir
 
 =head1 VERSION
 
-version 1.001001
+version 1.001002
 
 =head1 SYNOPSIS
 
@@ -257,7 +256,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric.
+This software is copyright (c) 2016 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
