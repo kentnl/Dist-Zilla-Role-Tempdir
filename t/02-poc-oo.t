@@ -23,6 +23,7 @@ EOF
 
   package Dist::Zilla::Plugin::TestTempDir;
   use Moose;
+  with 'Dist::Zilla::Role::Plugin';
   with 'Dist::Zilla::Role::Tempdir';
   with 'Dist::Zilla::Role::FileInjector';
   with 'Dist::Zilla::Role::InstallTool';

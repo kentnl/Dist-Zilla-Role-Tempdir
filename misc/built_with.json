@@ -59,6 +59,7 @@
       "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.025010",
       "Dist::Zilla::Role::FileInjector" : "5.043",
       "Dist::Zilla::Role::InstallTool" : "5.043",
+      "Dist::Zilla::Role::Plugin" : "5.043",
       "Dist::Zilla::Tester" : "5.043",
       "English" : "1.09",
       "ExtUtils::MakeMaker" : "7.11_06",

@@ -7,6 +7,7 @@ build_requires:
   Dist::Zilla::File::FromCode: '0'
   Dist::Zilla::Role::FileInjector: '0'
   Dist::Zilla::Role::InstallTool: '0'
+  Dist::Zilla::Role::Plugin: '0'
   Dist::Zilla::Tester: '0'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'

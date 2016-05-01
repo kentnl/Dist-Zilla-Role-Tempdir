@@ -15,6 +15,7 @@ my $called_capture = 0;
   package Dist::Zilla::Plugin::TestTempDir;
   use Moose;
   use Path::Tiny qw(path);
+  with 'Dist::Zilla::Role::Plugin';
   with 'Dist::Zilla::Role::Tempdir';
   with 'Dist::Zilla::Role::FileInjector';
   with 'Dist::Zilla::Role::InstallTool';

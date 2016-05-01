@@ -4,17 +4,28 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
-our $VERSION = '1.001002';
+our $VERSION = '1.001002'; # TRIAL
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-use Moose::Role;
+use Moose::Role qw( around with );
 use Path::Tiny qw(path);
 use Dist::Zilla::Tempdir::Dir;
 use Scalar::Util qw( blessed );
 use namespace::autoclean;
+
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
+  $payload->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  return $config;
+};
+
+no Moose::Role;
+
 
 
 
@@ -60,7 +71,6 @@ sub capture_tempdir {
   return $tdir->files;
 }
 
-no Moose::Role;
 1;
 
 __END__
@@ -83,9 +93,9 @@ version 1.001002
     Dist::Zilla::Plugin::FooBar;
 
   use Moose;
-  with 'Dist::Zilla::Role::Tempdir';
   with 'Dist::Zilla::Role::FileInjector';
   with 'Dist::Zilla::Role::InstallTool';
+  with 'Dist::Zilla::Role::Tempdir';
 
   sub setup_installer {
     my ( $self, $arg ) = @_ ;
