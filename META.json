@@ -141,22 +141,22 @@
    "provides" : {
       "Dist::Zilla::Role::Tempdir" : {
          "file" : "lib/Dist/Zilla/Role/Tempdir.pm",
-         "version" : "1.001002"
+         "version" : "1.001003"
       },
       "Dist::Zilla::Tempdir::Dir" : {
          "file" : "lib/Dist/Zilla/Tempdir/Dir.pm",
-         "version" : "1.001002"
+         "version" : "1.001003"
       },
       "Dist::Zilla::Tempdir::Item" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item.pm",
-         "version" : "1.001002"
+         "version" : "1.001003"
       },
       "Dist::Zilla::Tempdir::Item::State" : {
          "file" : "lib/Dist/Zilla/Tempdir/Item/State.pm",
-         "version" : "1.001002"
+         "version" : "1.001003"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/kentnl/Dist-Zilla-Role-Tempdir/issues"
@@ -168,7 +168,7 @@
          "web" : "https://github.com/kentnl/Dist-Zilla-Role-Tempdir"
       }
    },
-   "version" : "1.001002",
+   "version" : "1.001003",
    "x_BuiltWith" : {
       "external_file" : "misc/built_with.json"
    },
@@ -684,7 +684,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "1.001002-source",
+                  "tag" : "1.001003-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v"
                },
@@ -775,7 +775,7 @@
                   "branch" : "releases",
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "1.001002",
+                  "tag" : "1.001003",
                   "tag_format" : "%v",
                   "tag_message" : "v%v"
                },
@@ -926,7 +926,7 @@
       "zilla" : {
          "class" : "Dist::Zilla::Dist::Builder",
          "config" : {
-            "is_trial" : "1"
+            "is_trial" : "0"
          },
          "version" : "5.043"
       }
