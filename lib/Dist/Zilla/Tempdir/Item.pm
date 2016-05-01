@@ -1,5 +1,4 @@
-use 5.008;    # 08 -> [utf8], 06 -> [pragmas, our]
-use utf8;
+use 5.006;    #06 -> [pragmas, our]
 use strict;
 use warnings;
 
