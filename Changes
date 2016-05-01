@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Role-Tempdir
 
-1.001002 2016-04-30T22:35:41Z 3ac4072
+1.001002 2016-04-30T22:48:25Z 8d4569e
  [Dependencies::Stats]
  - Dependencies changed since 1.001001, see misc/*.deps* for details
  - configure: +1 (recommends: ↑1)
