@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Role-Tempdir
 
+1.001004 2017-03-10T12:09:08Z 344f468
+
 1.001003 2017-03-10T12:01:20Z e93ce4e
  - Ship previous devrel changes as stable
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot

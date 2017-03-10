@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
-our $VERSION = '1.001003';
+our $VERSION = '1.001004';
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
@@ -85,7 +85,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 1.001003
+version 1.001004
 
 =head1 SYNOPSIS
 

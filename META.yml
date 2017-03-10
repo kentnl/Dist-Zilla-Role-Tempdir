@@ -26,16 +26,16 @@ name: Dist-Zilla-Role-Tempdir
 provides:
   Dist::Zilla::Role::Tempdir:
     file: lib/Dist/Zilla/Role/Tempdir.pm
-    version: '1.001003'
+    version: '1.001004'
   Dist::Zilla::Tempdir::Dir:
     file: lib/Dist/Zilla/Tempdir/Dir.pm
-    version: '1.001003'
+    version: '1.001004'
   Dist::Zilla::Tempdir::Item:
     file: lib/Dist/Zilla/Tempdir/Item.pm
-    version: '1.001003'
+    version: '1.001004'
   Dist::Zilla::Tempdir::Item::State:
     file: lib/Dist/Zilla/Tempdir/Item/State.pm
-    version: '1.001003'
+    version: '1.001004'
 recommends:
   Moose: '2.000'
   Path::Tiny: '0.058'
@@ -59,4 +59,4 @@ resources:
   bugtracker: https://github.com/kentnl/Dist-Zilla-Role-Tempdir/issues
   homepage: https://github.com/kentnl/Dist-Zilla-Role-Tempdir
   repository: https://github.com/kentnl/Dist-Zilla-Role-Tempdir.git
-version: '1.001003'
+version: '1.001004'

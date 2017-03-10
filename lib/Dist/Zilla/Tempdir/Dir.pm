@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Tempdir::Dir;
 
-our $VERSION = '1.001003';
+our $VERSION = '1.001004';
 
 # ABSTRACT: A temporary directory with a collection of item states
 
@@ -286,7 +286,7 @@ Dist::Zilla::Tempdir::Dir - A temporary directory with a collection of item stat
 
 =head1 VERSION
 
-version 1.001003
+version 1.001004
 
 =head1 SYNOPSIS
 
