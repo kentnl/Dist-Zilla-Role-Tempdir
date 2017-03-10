@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Role::Tempdir;
 
-our $VERSION = '1.001002'; # TRIAL
+our $VERSION = '1.001003';
 
 # ABSTRACT: Shell Out and collect the result in a DZ plug-in.
 
@@ -85,7 +85,7 @@ Dist::Zilla::Role::Tempdir - Shell Out and collect the result in a DZ plug-in.
 
 =head1 VERSION
 
-version 1.001002
+version 1.001003
 
 =head1 SYNOPSIS
 
@@ -156,7 +156,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2016 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
